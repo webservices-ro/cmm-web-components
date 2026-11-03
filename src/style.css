@@ -4,7 +4,9 @@
   --cmat-green-soft: #66816f;
   --cmat-ink: #29352e;
   --cmat-muted: #657168;
-  --cmat-line: rgba(31, 107, 69, 0.18);
+  --cmat-line: rgba(31, 107, 69, 0.22);
+  --cmat-heading: "Cormorant", Cambria, Georgia, serif;
+  --cmat-body: "Fira Sans", Verdana, Arial, sans-serif;
 }
 
 .cmat-workshops-page .entry-title,
@@ -12,7 +14,7 @@
 .cmat-page, .cmat-page * { box-sizing: border-box; }
 .cmat-page {
   color: var(--cmat-ink);
-  font-family: "Fira Sans", Arial, sans-serif;
+  font-family: var(--cmat-body);
   margin-inline: calc(50% - 50vw);
   overflow: hidden;
   width: 100vw;
@@ -34,7 +36,7 @@
 .cmat-hero__veil { background: rgba(255,255,255,.66); inset: 0; position: absolute; z-index: -1; }
 .cmat-hero h1 {
   color: var(--cmat-green);
-  font-family: Cormorant, Georgia, serif;
+  font-family: var(--cmat-heading);
   font-size: clamp(2.4rem, 5.2vw, 5.1rem);
   font-weight: 400;
   line-height: 1.05;
@@ -43,35 +45,53 @@
   text-align: center;
   text-wrap: balance;
 }
-.cmat-intro { margin: 0 auto; max-width: 1000px; padding: clamp(4rem,7vw,7rem) 1.5rem clamp(2.75rem,5vw,4.75rem); }
+.cmat-intro { margin: 0 auto; max-width: 1180px; padding: clamp(4.5rem,7vw,7rem) max(1.5rem,4vw) clamp(3.5rem,5vw,5rem); }
+.cmat-section-label {
+  color: var(--cmat-green);
+  font-size: .72rem !important;
+  font-style: normal !important;
+  font-weight: 700;
+  letter-spacing: .15em;
+  line-height: 1.5 !important;
+  margin: 0 0 .9rem !important;
+  text-align: left !important;
+  text-transform: uppercase;
+}
 .cmat-intro h2 {
   color: var(--cmat-green);
-  font-family: Cormorant, Georgia, serif;
-  font-size: clamp(2.1rem,4vw,3.6rem);
-  font-weight: 500;
-  line-height: 1.12;
-  margin: 0 0 2rem;
-  text-align: center;
+  font-family: var(--cmat-heading);
+  font-size: clamp(2.5rem,4.6vw,4.25rem);
+  font-weight: 600;
+  line-height: 1.04;
+  margin: 0 0 2.4rem;
+  max-width: 900px;
+  text-align: left;
 }
-.cmat-intro p { color: var(--cmat-green-dark); font-size: clamp(1rem,1.2vw,1.12rem); line-height: 1.85; margin: 0 0 1.2rem; }
+.cmat-intro__text { column-count: 2; column-gap: clamp(2.5rem,5vw,5rem); }
+.cmat-intro__text p { break-inside: avoid; color: var(--cmat-muted); font-size: 1rem; line-height: 1.75; margin: 0 0 1.35rem; }
+.cmat-intro__text p:first-child { color: var(--cmat-green-dark); font-family: var(--cmat-heading); font-size: clamp(1.35rem,2vw,1.7rem); font-weight: 600; line-height: 1.4; }
 .cmat-intro .cmat-signoff {
-  font-family: Cormorant, Georgia, serif;
+  border-top: 1px solid var(--cmat-line);
+  color: var(--cmat-green-dark);
+  font-family: var(--cmat-heading);
   font-size: clamp(1.35rem,2.2vw,1.8rem);
   font-style: italic;
-  margin: 2.25rem 0 0;
+  margin: 2rem 0 0;
+  padding-top: 1.4rem;
   text-align: right;
 }
 .cmat-divider { margin: 0 auto; max-width: 1200px; min-height: 1px; padding: 0 1.5rem; }
 .cmat-divider img { display: block; height: auto; opacity: .78; width: 100%; }
-.cmat-workshops { margin: 0 auto; max-width: 1240px; padding: clamp(3.5rem,6vw,6rem) 1.5rem 7rem; }
-.cmat-grid { display: grid; gap: clamp(2rem,4vw,4rem); grid-template-columns: repeat(2,minmax(0,1fr)); }
-.cmat-card { background: #fff; border-bottom: 1px solid var(--cmat-line); display: grid; grid-template-columns: minmax(0,.92fr) minmax(0,1.08fr); min-width: 0; overflow: hidden; }
-.cmat-card__media { background: #edf1ed; display: block; min-height: 330px; overflow: hidden; }
+.cmat-workshops { margin: 0 auto; max-width: 1180px; padding: clamp(3.75rem,6vw,6rem) max(1.5rem,4vw) 7rem; }
+.cmat-workshops h2 { color: var(--cmat-green); font-family: var(--cmat-heading); font-size: clamp(2.4rem,4vw,3.7rem); font-weight: 600; line-height: 1.06; margin: 0 0 2.2rem; }
+.cmat-grid { display: grid; gap: 1.15rem; grid-template-columns: repeat(3,minmax(0,1fr)); }
+.cmat-card { background: #fff; border: 1px solid var(--cmat-line); display: flex; flex-direction: column; min-width: 0; overflow: hidden; }
+.cmat-card__media { aspect-ratio: 4/3; background: #edf1ed; border-bottom: 1px solid var(--cmat-line); display: block; min-height: 0; overflow: hidden; }
 .cmat-card__media img { height: 100%; object-fit: cover; transition: transform 500ms ease; width: 100%; }
 .cmat-card__media:hover img { transform: scale(1.025); }
 .cmat-card__placeholder { background: linear-gradient(145deg,#e5ebe6,#f7f4ef); display: block; height: 100%; }
-.cmat-card__body { display: flex; flex-direction: column; padding: clamp(1.5rem,3vw,2.5rem); }
-.cmat-card h3 { font-family: Cormorant,Georgia,serif; font-size: clamp(1.8rem,3vw,2.6rem); font-weight: 500; line-height: 1.08; margin: 0 0 1rem; }
+.cmat-card__body { display: flex; flex: 1; flex-direction: column; padding: clamp(1.45rem,2.4vw,2rem); }
+.cmat-card h3 { font-family: var(--cmat-heading); font-size: clamp(1.65rem,2.3vw,2.05rem); font-weight: 600; line-height: 1.12; margin: 0 0 .85rem; }
 .cmat-card h3 a { color: var(--cmat-green); text-decoration: none; }
 .cmat-card__description { color: var(--cmat-muted); display: -webkit-box; font-size: .98rem; line-height: 1.65; margin: 0 0 1.5rem; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 4; }
 .cmat-card__meta { align-items: baseline; display: flex; flex-wrap: wrap; gap: .75rem 1.25rem; margin-top: auto; }
@@ -79,26 +99,27 @@
 .cmat-card__price del { color: var(--cmat-muted); font-size: .9em; margin-right: .35rem; }
 .cmat-card__reviews { color: var(--cmat-green-soft); font-size: .88rem; text-decoration: underline; text-underline-offset: 3px; }
 .cmat-card__actions { display: flex; flex-wrap: wrap; gap: .65rem; margin-top: 1.5rem; }
-.cmat-button { border: 1px solid var(--cmat-green); font-size: .84rem; font-weight: 600; letter-spacing: .04em; padding: .82rem 1rem; text-align: center; text-decoration: none; text-transform: uppercase; transition: background-color 180ms ease,color 180ms ease; }
+.cmat-button { border: 1px solid var(--cmat-green); border-radius: 3px; font-size: .72rem; font-weight: 700; letter-spacing: .07em; min-height: 46px; padding: .82rem 1rem; text-align: center; text-decoration: none; text-transform: uppercase; transition: background-color 180ms ease,color 180ms ease; }
 .cmat-button--primary, .cmat-button--secondary:hover { background: var(--cmat-green); color: #fff; }
 .cmat-button--secondary, .cmat-button--primary:hover { background: transparent; color: var(--cmat-green); }
 .cmat-empty { color: var(--cmat-green); padding: 2rem 1rem; text-align: center; }
-.cmat-empty h3 { font-family: Cormorant,Georgia,serif; font-size: 2.2rem; font-weight: 500; margin: 0 0 .6rem; }
+.cmat-empty { border: 1px solid var(--cmat-line); padding: 3rem 1.5rem; }
+.cmat-empty h3 { font-family: var(--cmat-heading); font-size: 2.2rem; font-weight: 600; margin: 0 0 .6rem; }
 .cmat-empty p { color: var(--cmat-muted); margin: 0; }
 .cmat-visually-hidden { height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; clip: rect(0,0,0,0); }
 
 @media (max-width: 1024px) {
-  .cmat-grid { grid-template-columns: 1fr; }
-  .cmat-card__media { min-height: 390px; }
+  .cmat-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
 }
 @media (max-width: 680px) {
   .cmat-hero { min-height: 58vh; padding-inline: 1.25rem; }
   .cmat-hero h1 { font-size: clamp(2.2rem,11vw,3.25rem); }
   .cmat-intro, .cmat-workshops { padding-left: 1.15rem; padding-right: 1.15rem; }
-  .cmat-intro p { line-height: 1.72; }
+  .cmat-intro__text { column-count: 1; }
+  .cmat-intro__text p { line-height: 1.72; }
   .cmat-intro .cmat-signoff { text-align: center; }
-  .cmat-card { grid-template-columns: 1fr; }
-  .cmat-card__media { aspect-ratio: 4/5; min-height: 0; }
+  .cmat-grid { grid-template-columns: 1fr; }
+  .cmat-card__media { aspect-ratio: 4/3; }
   .cmat-card__actions, .cmat-button { width: 100%; }
 }
 @media (prefers-reduced-motion: reduce) {

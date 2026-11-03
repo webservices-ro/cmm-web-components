@@ -55,8 +55,11 @@ export default function App({ config = {} }) {
       </section>
 
       <section className="cmat-intro" aria-labelledby="cmat-intro-title">
+        <p className="cmat-section-label">Concept și abordare</p>
         <h2 id="cmat-intro-title">Mai mult decât ateliere de creație</h2>
-        {INTRO_PARAGRAPHS.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+        <div className="cmat-intro__text">
+          {INTRO_PARAGRAPHS.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+        </div>
         <p className="cmat-signoff">Onorează natura din tine!</p>
       </section>
 
@@ -65,7 +68,8 @@ export default function App({ config = {} }) {
       </div>
 
       <section className="cmat-workshops" aria-labelledby="cmat-workshops-title">
-        <h2 id="cmat-workshops-title" className="cmat-visually-hidden">Ateliere disponibile</h2>
+        <p className="cmat-section-label">Experiențe botanice</p>
+        <h2 id="cmat-workshops-title">Ateliere disponibile</h2>
         {workshops.length > 0 ? (
           <div className="cmat-grid">
             {workshops.map((workshop) => <WorkshopCard key={workshop.id} workshop={workshop} />)}
