@@ -1,7 +1,22 @@
-# WordPress React Module Template
+# Ateliere terapeutice — Claudia Maria
 
-This repository is a minimal React-powered WordPress plugin starter. Its
-identity and release metadata live in [`module.config.json`](./module.config.json).
+Modul WordPress/React pentru pagina permanentă **Ateliere terapeutice**. La activare:
+
+- creează pagina publică `/ateliere-terapeutice/` cu shortcode-ul `[cmat_workshops]`;
+- creează categoria WooCommerce `ateliere-terapeutice`;
+- introduce legătura „Ateliere terapeutice” între „Filosofia mea” și „Blog” în meniul care conține aceste două elemente;
+- afișează automat toate produsele publicate din categoria dedicată;
+- păstrează pagina individuală WooCommerce, plata, stocul și recenziile proprii pentru fiecare atelier.
+
+## Administrarea atelierelor
+
+Pentru un atelier nou, creează un produs WooCommerce, completează titlul, descrierea scurtă, prețul, stocul și imaginea produsului, activează recenziile și bifează categoria **Ateliere terapeutice**. Atelierul apare automat în vitrină, fără modificarea paginii.
+
+Coperta paginii se setează din **Imagine reprezentativă** pe pagina „Ateliere terapeutice”. Până la adăugarea imaginii finale, pagina folosește un fundal neutru. Shortcode-ul acceptă și atributele `hero_image` și `divider_image` dacă imaginile trebuie furnizate explicit prin URL.
+
+## Dezvoltare
+
+Identitatea și metadatele de release sunt definite în [`module.config.json`](./module.config.json).
 
 ## Scaffold a module
 

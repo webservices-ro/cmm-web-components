@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name: My React Module
+ * Plugin Name: Ateliere terapeutice Claudia Maria
  * Plugin URI: https://github.com/owner/my-react-module
- * Description: A minimal React module for WordPress.
+ * Description: Pagină permanentă și vitrină WooCommerce pentru atelierele terapeutice Claudia Maria.
  * Version: __PLUGIN_VERSION__
  * Update URI: https://github.com/owner/my-react-module
  * Text Domain: my-react-module
@@ -131,7 +131,78 @@ function mrm_register_assets() {
     return $handles;
 }
 
-function mrm_render_shortcode() {
+function cmat_get_workshops_page_id() {
+    $page_id = absint(get_option('cmat_workshops_page_id'));
+    if ($page_id && 'page' === get_post_type($page_id)) {
+        return $page_id;
+    }
+
+    $page = get_page_by_path('ateliere-terapeutice');
+    return $page ? (int) $page->ID : 0;
+}
+
+function cmat_activate_plugin() {
+    if (taxonomy_exists('product_cat') && !term_exists('ateliere-terapeutice', 'product_cat')) {
+        wp_insert_term('Ateliere terapeutice', 'product_cat', array(
+            'slug' => 'ateliere-terapeutice',
+            'description' => 'Atelierele afișate automat în pagina Ateliere terapeutice.',
+        ));
+    }
+
+    $page = get_page_by_path('ateliere-terapeutice');
+    if (!$page) {
+        $page_id = wp_insert_post(array(
+            'post_title' => 'Ateliere terapeutice',
+            'post_name' => 'ateliere-terapeutice',
+            'post_content' => '[cmat_workshops]',
+            'post_status' => 'publish',
+            'post_type' => 'page',
+        ));
+        if (!is_wp_error($page_id)) {
+            update_option('cmat_workshops_page_id', (int) $page_id);
+        }
+    } else {
+        update_option('cmat_workshops_page_id', (int) $page->ID);
+    }
+}
+register_activation_hook(MRM_PLUGIN_FILE, 'cmat_activate_plugin');
+
+function cmat_get_workshops() {
+    if (!function_exists('wc_get_products')) {
+        return array();
+    }
+
+    $products = wc_get_products(array(
+        'status' => 'publish',
+        'limit' => -1,
+        'category' => array('ateliere-terapeutice'),
+        'orderby' => 'date',
+        'order' => 'DESC',
+    ));
+
+    return array_map(static function ($product) {
+        $image_id = $product->get_image_id();
+        $image = $image_id ? wp_get_attachment_image_url($image_id, 'woocommerce_single') : '';
+        $image_alt = $image_id ? get_post_meta($image_id, '_wp_attachment_image_alt', true) : '';
+        $can_add_to_cart = $product->is_type('simple') && $product->is_purchasable() && $product->is_in_stock();
+
+        return array(
+            'id' => $product->get_id(),
+            'name' => $product->get_name(),
+            'url' => $product->get_permalink(),
+            'image' => $image ?: '',
+            'imageAlt' => $image_alt ?: $product->get_name(),
+            'description' => wp_trim_words(wp_strip_all_tags($product->get_short_description()), 38),
+            'priceHtml' => wp_kses_post($product->get_price_html()),
+            'addToCartUrl' => $can_add_to_cart ? $product->add_to_cart_url() : $product->get_permalink(),
+            'buttonText' => $can_add_to_cart ? 'Adaugă în coș' : 'Vezi opțiunile',
+            'reviewsEnabled' => (bool) $product->get_reviews_allowed(),
+            'reviewCount' => (int) $product->get_review_count(),
+        );
+    }, $products);
+}
+
+function cmat_render_workshops_shortcode($attributes = array()) {
     $handles = mrm_register_assets();
 
     if ($handles['script']) {
@@ -141,6 +212,85 @@ function mrm_render_shortcode() {
         wp_enqueue_style($style_handle);
     }
 
-    return '<div data-my-react-module-root></div>';
+    $attributes = shortcode_atts(array(
+        'hero_image' => '',
+        'divider_image' => '',
+    ), $attributes, 'cmat_workshops');
+
+    $page_id = get_queried_object_id();
+    $hero_image = esc_url_raw($attributes['hero_image']);
+    if (!$hero_image && $page_id && has_post_thumbnail($page_id)) {
+        $hero_image = wp_get_attachment_image_url(get_post_thumbnail_id($page_id), 'full');
+    }
+
+    $config = array(
+        'heroImage' => $hero_image ?: '',
+        'dividerImage' => esc_url_raw($attributes['divider_image']),
+        'workshops' => cmat_get_workshops(),
+    );
+
+    return sprintf(
+        '<div data-my-react-module-root data-config="%s"></div>',
+        esc_attr(wp_json_encode($config, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
+    );
 }
-add_shortcode('mrm', 'mrm_render_shortcode');
+add_shortcode('cmat_workshops', 'cmat_render_workshops_shortcode');
+add_shortcode('mrm', 'cmat_render_workshops_shortcode');
+
+function cmat_add_body_class($classes) {
+    $page_id = cmat_get_workshops_page_id();
+    if ($page_id && is_page($page_id)) {
+        $classes[] = 'cmat-workshops-page';
+    }
+    return $classes;
+}
+add_filter('body_class', 'cmat_add_body_class');
+
+function cmat_insert_workshops_menu_item($items, $args) {
+    unset($args);
+    $page_id = cmat_get_workshops_page_id();
+    if (!$page_id || 'publish' !== get_post_status($page_id)) {
+        return $items;
+    }
+
+    $philosophy_index = null;
+    $has_blog = false;
+    foreach ($items as $index => $item) {
+        if ((int) ($item->object_id ?? 0) === $page_id) {
+            return $items;
+        }
+        $title = strtolower(remove_accents(wp_strip_all_tags($item->title ?? '')));
+        if (false !== strpos($title, 'filosofia mea')) {
+            $philosophy_index = $index;
+        }
+        if ('blog' === trim($title)) {
+            $has_blog = true;
+        }
+    }
+
+    if (null === $philosophy_index || !$has_blog) {
+        return $items;
+    }
+
+    $menu_item = (object) array(
+        'ID' => -$page_id,
+        'db_id' => 0,
+        'menu_item_parent' => 0,
+        'object_id' => $page_id,
+        'object' => 'page',
+        'type' => 'post_type',
+        'type_label' => 'Pagină',
+        'title' => 'Ateliere terapeutice',
+        'url' => get_permalink($page_id),
+        'target' => '',
+        'attr_title' => '',
+        'description' => '',
+        'classes' => array('menu-item', 'menu-item-type-post_type', 'menu-item-object-page', 'cmat-menu-item'),
+        'xfn' => '',
+        'status' => 'publish',
+    );
+
+    array_splice($items, $philosophy_index + 1, 0, array($menu_item));
+    return $items;
+}
+add_filter('wp_nav_menu_objects', 'cmat_insert_workshops_menu_item', 20, 2);
