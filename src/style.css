@@ -102,8 +102,7 @@
 .cmat-button { border: 1px solid var(--cmat-green); border-radius: 3px; font-size: .72rem; font-weight: 700; letter-spacing: .07em; min-height: 46px; padding: .82rem 1rem; text-align: center; text-decoration: none; text-transform: uppercase; transition: background-color 180ms ease,color 180ms ease; }
 .cmat-button--primary, .cmat-button--secondary:hover { background: var(--cmat-green); color: #fff; }
 .cmat-button--secondary, .cmat-button--primary:hover { background: transparent; color: var(--cmat-green); }
-.cmat-empty { color: var(--cmat-green); padding: 2rem 1rem; text-align: center; }
-.cmat-empty { border: 1px solid var(--cmat-line); padding: 3rem 1.5rem; }
+.cmat-empty { border: 1px solid var(--cmat-line); color: var(--cmat-green); padding: 3rem 1.5rem; text-align: center; }
 .cmat-empty h3 { font-family: var(--cmat-heading); font-size: 2.2rem; font-weight: 600; margin: 0 0 .6rem; }
 .cmat-empty p { color: var(--cmat-muted); margin: 0; }
 .cmat-visually-hidden { height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; clip: rect(0,0,0,0); }
