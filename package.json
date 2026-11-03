@@ -1,0 +1,23 @@
+{
+  "name": "claudia-maria-wp-react",
+  "private": true,
+  "version": "2.0.4",
+  "author": "webservices.ro",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host localhost",
+    "build": "vite build",
+    "package": "npm run build && sh scripts/package-plugin.sh",
+    "deploy": "sh scripts/deploy.sh",
+    "version:patch": "npm version patch --no-git-tag-version",
+    "version:minor": "npm version minor --no-git-tag-version",
+    "version:major": "npm version major --no-git-tag-version"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "latest",
+    "vite": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  },
+  "devDependencies": {}
+}

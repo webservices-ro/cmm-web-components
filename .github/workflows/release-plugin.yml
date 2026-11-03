@@ -1,0 +1,66 @@
+name: Release WordPress plugin
+
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  release:
+    name: Build and publish plugin
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate release version
+        id: version
+        shell: bash
+        run: |
+          package_version=$(node -p "require('./package.json').version")
+          if [[ "${GITHUB_REF_TYPE}" == "tag" ]]; then
+            tag_version="${GITHUB_REF_NAME#v}"
+            if [[ "${tag_version}" != "${package_version}" ]]; then
+              echo "Tag ${GITHUB_REF_NAME} does not match package version ${package_version}." >&2
+              exit 1
+            fi
+          fi
+          echo "version=${package_version}" >> "${GITHUB_OUTPUT}"
+          echo "tag=v${package_version}" >> "${GITHUB_OUTPUT}"
+
+      - name: Build plugin ZIP
+        run: npm run package
+
+      - name: Prepare release assets
+        shell: bash
+        run: |
+          cp "release/claudia-maria-wp-react-${{ steps.version.outputs.version }}.zip" \
+            release/claudia-maria-wp-react.zip
+          node scripts/create-update-manifest.mjs release/update.json
+
+      - name: Publish to release repository
+        env:
+          GH_TOKEN: ${{ secrets.RELEASE_REPO_TOKEN }}
+        run: |
+          gh release create "${{ steps.version.outputs.tag }}" \
+            release/claudia-maria-wp-react.zip \
+            release/update.json \
+            --repo alexbran8/claudia-maria-web-components-releases \
+            --target main \
+            --title "Claudia Maria React Components ${{ steps.version.outputs.version }}" \
+            --notes "WordPress plugin release ${{ steps.version.outputs.version }}." \
+            --latest
