@@ -1,9 +1,9 @@
 {
-  "slug": "my-react-module",
-  "name": "My React Module",
+  "slug": "cmm-components",
+  "name": "CMM Components",
   "phpPrefix": "mrm",
   "githubOwner": "owner",
-  "releaseRepository": "owner/my-react-module",
+  "releaseRepository": "owner/cmm-components",
   "requiresWordPress": "6.0",
   "requiresPhp": "7.4",
   "testedWordPress": "6.8"

@@ -1,4 +1,4 @@
-=== My React Module ===
+=== CMM Components ===
 Contributors: owner
 Tags: react, shortcode
 Requires at least: 6.0
@@ -13,7 +13,7 @@ A minimal React module for WordPress.
 == Installation ==
 
 1. Upload the plugin ZIP in Plugins > Add Plugin > Upload Plugin.
-2. Activate My React Module.
+2. Activate CMM Components.
 3. Add the [mrm] shortcode to a page or post.
 
 == Changelog ==

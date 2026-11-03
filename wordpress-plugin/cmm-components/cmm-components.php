@@ -1,11 +1,11 @@
 <?php
 /**
  * Plugin Name: Ateliere terapeutice Claudia Maria
- * Plugin URI: https://github.com/owner/my-react-module
+ * Plugin URI: https://github.com/owner/cmm-components
  * Description: Pagină permanentă și vitrină WooCommerce pentru atelierele terapeutice Claudia Maria.
  * Version: __PLUGIN_VERSION__
- * Update URI: https://github.com/owner/my-react-module
- * Text Domain: my-react-module
+ * Update URI: https://github.com/owner/cmm-components
+ * Text Domain: cmm-components
  * Requires at least: 6.0
  * Requires PHP: 7.4
  */
@@ -17,7 +17,7 @@ if (!defined('ABSPATH')) {
 define('MRM_VERSION', '__PLUGIN_VERSION__');
 define('MRM_PLUGIN_FILE', __FILE__);
 define('MRM_PLUGIN_DIR', plugin_dir_path(__FILE__));
-define('MRM_UPDATE_MANIFEST_URL', 'https://github.com/owner/my-react-module/releases/latest/download/update.json');
+define('MRM_UPDATE_MANIFEST_URL', 'https://github.com/owner/cmm-components/releases/latest/download/update.json');
 
 function mrm_get_release_data() {
     static $release = null;
@@ -59,7 +59,7 @@ function mrm_check_for_update($update, $plugin_data, $plugin_file, $locales) {
     }
 
     return array(
-        'slug' => 'my-react-module',
+        'slug' => 'cmm-components',
         'version' => sanitize_text_field($release['version']),
         'url' => esc_url_raw($release['details_url'] ?? ''),
         'package' => esc_url_raw($release['download_url']),
@@ -70,7 +70,7 @@ function mrm_check_for_update($update, $plugin_data, $plugin_file, $locales) {
 add_filter('update_plugins_github.com', 'mrm_check_for_update', 10, 4);
 
 function mrm_plugin_information($result, $action, $args) {
-    if ('plugin_information' !== $action || empty($args->slug) || 'my-react-module' !== $args->slug) {
+    if ('plugin_information' !== $action || empty($args->slug) || 'cmm-components' !== $args->slug) {
         return $result;
     }
 
@@ -81,8 +81,8 @@ function mrm_plugin_information($result, $action, $args) {
 
     $sections = is_array($release['sections'] ?? null) ? $release['sections'] : array();
     return (object) array(
-        'name' => sanitize_text_field($release['name'] ?? 'My React Module'),
-        'slug' => 'my-react-module',
+        'name' => sanitize_text_field($release['name'] ?? 'CMM Components'),
+        'slug' => 'cmm-components',
         'version' => sanitize_text_field($release['version']),
         'homepage' => esc_url_raw($release['details_url'] ?? ''),
         'requires' => sanitize_text_field($release['requires'] ?? '6.0'),
@@ -117,13 +117,13 @@ function mrm_register_assets() {
     }
 
     $base_url = plugin_dir_url(MRM_PLUGIN_FILE) . 'dist/';
-    $script_handle = 'my-react-module-app';
+    $script_handle = 'cmm-components-app';
     wp_register_script($script_handle, $base_url . $entry['file'], array(), MRM_VERSION, true);
     wp_script_add_data($script_handle, 'type', 'module');
     $handles['script'] = $script_handle;
 
     foreach (($entry['css'] ?? array()) as $index => $css_file) {
-        $style_handle = 'my-react-module-app-' . $index;
+        $style_handle = 'cmm-components-app-' . $index;
         wp_register_style($style_handle, $base_url . $css_file, array(), MRM_VERSION);
         $handles['styles'][] = $style_handle;
     }
@@ -230,7 +230,7 @@ function cmat_render_workshops_shortcode($attributes = array()) {
     );
 
     return sprintf(
-        '<div data-my-react-module-root data-config="%s"></div>',
+        '<div data-cmm-components-root data-config="%s"></div>',
         esc_attr(wp_json_encode($config, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
     );
 }
