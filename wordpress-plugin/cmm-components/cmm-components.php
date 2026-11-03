@@ -14,12 +14,12 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('MRM_VERSION', '__PLUGIN_VERSION__');
-define('MRM_PLUGIN_FILE', __FILE__);
-define('MRM_PLUGIN_DIR', plugin_dir_path(__FILE__));
-define('MRM_UPDATE_MANIFEST_URL', 'https://github.com/owner/cmm-components/releases/latest/download/update.json');
+define('CMMC_VERSION', '__PLUGIN_VERSION__');
+define('CMMC_PLUGIN_FILE', __FILE__);
+define('CMMC_PLUGIN_DIR', plugin_dir_path(__FILE__));
+define('CMMC_UPDATE_MANIFEST_URL', 'https://github.com/owner/cmm-components/releases/latest/download/update.json');
 
-function mrm_get_release_data() {
+function cmmc_get_release_data() {
     static $release = null;
     static $requested = false;
 
@@ -28,7 +28,7 @@ function mrm_get_release_data() {
     }
 
     $requested = true;
-    $response = wp_remote_get(MRM_UPDATE_MANIFEST_URL, array(
+    $response = wp_remote_get(CMMC_UPDATE_MANIFEST_URL, array(
         'timeout' => 10,
         'headers' => array('Accept' => 'application/json'),
     ));
@@ -41,14 +41,14 @@ function mrm_get_release_data() {
     return $release = is_array($decoded) ? $decoded : false;
 }
 
-function mrm_check_for_update($update, $plugin_data, $plugin_file, $locales) {
+function cmmc_check_for_update($update, $plugin_data, $plugin_file, $locales) {
     unset($locales);
 
-    if (plugin_basename(MRM_PLUGIN_FILE) !== $plugin_file) {
+    if (plugin_basename(CMMC_PLUGIN_FILE) !== $plugin_file) {
         return $update;
     }
 
-    $release = mrm_get_release_data();
+    $release = cmmc_get_release_data();
     if (
         !is_array($release)
         || empty($release['version'])
@@ -67,14 +67,14 @@ function mrm_check_for_update($update, $plugin_data, $plugin_file, $locales) {
         'requires_php' => sanitize_text_field($release['requires_php'] ?? ''),
     );
 }
-add_filter('update_plugins_github.com', 'mrm_check_for_update', 10, 4);
+add_filter('update_plugins_github.com', 'cmmc_check_for_update', 10, 4);
 
-function mrm_plugin_information($result, $action, $args) {
+function cmmc_plugin_information($result, $action, $args) {
     if ('plugin_information' !== $action || empty($args->slug) || 'cmm-components' !== $args->slug) {
         return $result;
     }
 
-    $release = mrm_get_release_data();
+    $release = cmmc_get_release_data();
     if (!is_array($release) || empty($release['version'])) {
         return $result;
     }
@@ -96,16 +96,16 @@ function mrm_plugin_information($result, $action, $args) {
         ),
     );
 }
-add_filter('plugins_api', 'mrm_plugin_information', 10, 3);
+add_filter('plugins_api', 'cmmc_plugin_information', 10, 3);
 
-function mrm_register_assets() {
+function cmmc_register_assets() {
     static $handles = null;
     if (null !== $handles) {
         return $handles;
     }
 
     $handles = array('script' => '', 'styles' => array());
-    $manifest_path = MRM_PLUGIN_DIR . 'dist/.vite/manifest.json';
+    $manifest_path = CMMC_PLUGIN_DIR . 'dist/.vite/manifest.json';
     if (!is_readable($manifest_path)) {
         return $handles;
     }
@@ -116,15 +116,15 @@ function mrm_register_assets() {
         return $handles;
     }
 
-    $base_url = plugin_dir_url(MRM_PLUGIN_FILE) . 'dist/';
+    $base_url = plugin_dir_url(CMMC_PLUGIN_FILE) . 'dist/';
     $script_handle = 'cmm-components-app';
-    wp_register_script($script_handle, $base_url . $entry['file'], array(), MRM_VERSION, true);
+    wp_register_script($script_handle, $base_url . $entry['file'], array(), CMMC_VERSION, true);
     wp_script_add_data($script_handle, 'type', 'module');
     $handles['script'] = $script_handle;
 
     foreach (($entry['css'] ?? array()) as $index => $css_file) {
         $style_handle = 'cmm-components-app-' . $index;
-        wp_register_style($style_handle, $base_url . $css_file, array(), MRM_VERSION);
+        wp_register_style($style_handle, $base_url . $css_file, array(), CMMC_VERSION);
         $handles['styles'][] = $style_handle;
     }
 
@@ -165,7 +165,7 @@ function cmat_activate_plugin() {
         update_option('cmat_workshops_page_id', (int) $page->ID);
     }
 }
-register_activation_hook(MRM_PLUGIN_FILE, 'cmat_activate_plugin');
+register_activation_hook(CMMC_PLUGIN_FILE, 'cmat_activate_plugin');
 
 function cmat_get_workshops() {
     if (!function_exists('wc_get_products')) {
@@ -203,7 +203,7 @@ function cmat_get_workshops() {
 }
 
 function cmat_render_workshops_shortcode($attributes = array()) {
-    $handles = mrm_register_assets();
+    $handles = cmmc_register_assets();
 
     if ($handles['script']) {
         wp_enqueue_script($handles['script']);
@@ -235,7 +235,6 @@ function cmat_render_workshops_shortcode($attributes = array()) {
     );
 }
 add_shortcode('cmat_workshops', 'cmat_render_workshops_shortcode');
-add_shortcode('mrm', 'cmat_render_workshops_shortcode');
 
 function cmat_add_body_class($classes) {
     $page_id = cmat_get_workshops_page_id();
