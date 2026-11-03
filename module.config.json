@@ -1,0 +1,10 @@
+{
+  "slug": "my-react-module",
+  "name": "My React Module",
+  "phpPrefix": "mrm",
+  "githubOwner": "owner",
+  "releaseRepository": "owner/my-react-module",
+  "requiresWordPress": "6.0",
+  "requiresPhp": "7.4",
+  "testedWordPress": "6.8"
+}

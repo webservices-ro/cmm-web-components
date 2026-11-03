@@ -1,10 +1,10 @@
 {
-  "name": "claudia-maria-wp-react",
+  "name": "my-react-module",
   "private": true,
-  "version": "2.0.4",
-  "author": "webservices.ro",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
+    "setup": "node scripts/setup.mjs",
     "dev": "vite --host localhost",
     "build": "vite build",
     "package": "npm run build && sh scripts/package-plugin.sh",

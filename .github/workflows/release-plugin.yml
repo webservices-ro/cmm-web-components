@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   release:
@@ -26,6 +26,15 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Read module configuration
+        id: module
+        run: |
+          node --input-type=module <<'NODE'
+          import { appendFileSync, readFileSync } from 'node:fs'
+          const config = JSON.parse(readFileSync('module.config.json', 'utf8'))
+          appendFileSync(process.env.GITHUB_OUTPUT, `slug=${config.slug}\nrelease_repository=${config.releaseRepository}\nname=${config.name}\n`)
+          NODE
 
       - name: Validate release version
         id: version
@@ -47,20 +56,27 @@ jobs:
 
       - name: Prepare release assets
         shell: bash
+        env:
+          MODULE_SLUG: ${{ steps.module.outputs.slug }}
+          MODULE_VERSION: ${{ steps.version.outputs.version }}
         run: |
-          cp "release/claudia-maria-wp-react-${{ steps.version.outputs.version }}.zip" \
-            release/claudia-maria-wp-react.zip
+          cp "release/${MODULE_SLUG}-${MODULE_VERSION}.zip" "release/${MODULE_SLUG}.zip"
           node scripts/create-update-manifest.mjs release/update.json
 
-      - name: Publish to release repository
+      - name: Publish release assets
         env:
-          GH_TOKEN: ${{ secrets.RELEASE_REPO_TOKEN }}
+          GH_TOKEN: ${{ secrets.RELEASE_REPO_TOKEN || github.token }}
+          RELEASE_TAG: ${{ steps.version.outputs.tag }}
+          RELEASE_REPOSITORY: ${{ steps.module.outputs.release_repository }}
+          MODULE_NAME: ${{ steps.module.outputs.name }}
+          MODULE_SLUG: ${{ steps.module.outputs.slug }}
+          MODULE_VERSION: ${{ steps.version.outputs.version }}
         run: |
-          gh release create "${{ steps.version.outputs.tag }}" \
-            release/claudia-maria-wp-react.zip \
+          gh release create "$RELEASE_TAG" \
+            "release/$MODULE_SLUG.zip" \
             release/update.json \
-            --repo alexbran8/claudia-maria-web-components-releases \
+            --repo "$RELEASE_REPOSITORY" \
             --target main \
-            --title "Claudia Maria React Components ${{ steps.version.outputs.version }}" \
-            --notes "WordPress plugin release ${{ steps.version.outputs.version }}." \
+            --title "$MODULE_NAME $MODULE_VERSION" \
+            --notes "WordPress plugin release $MODULE_VERSION." \
             --latest

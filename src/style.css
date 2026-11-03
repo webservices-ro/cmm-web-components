@@ -1,8 +1,19 @@
-.react-page{--cm-primary:var(--e-global-color-primary,#183b61);--cm-secondary:var(--e-global-color-secondary,#35698f);--cm-text:var(--e-global-color-text,#304457);--cm-accent:var(--e-global-color-accent,#c8aa70);--cm-cream:#faf8f2;--cm-ice:#eef5f8;--cm-muted:#5d7080;--cm-border:#dce6ec;--cm-white:#fff;--cm-heading-font:var(--cm-font-heading);--cm-body-font:var(--cm-font-body);background:var(--cm-white);color:var(--cm-text);font-family:var(--cm-body-font);font-size:16px;line-height:1.55}
-.react-page.cm-use-module-styling{--cm-primary:#183b61;--cm-secondary:#35698f;--cm-text:#304457;--cm-accent:#c8aa70;--cm-heading-font:Cambria;--cm-body-font:Verdana}
-.react-page,.react-page *,.react-page *::before,.react-page *::after{box-sizing:border-box}.react-page h1,.react-page h2,.react-page h3{color:var(--cm-primary);font-family:var(--cm-heading-font),Georgia,serif;font-weight:500}.react-page h2{font-size:clamp(2.125rem,4vw,3.125rem);line-height:1.08;margin:.625rem 0 1.375rem}.cm-container{margin:0 auto;width:min(1180px,92%)}.cm-kicker{color:var(--cm-secondary);font-size:.75rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
-.cm-hero{background:var(--cm-cream);padding:4.5rem 0 3.625rem;text-align:center}.cm-hero h1{font-size:clamp(2.625rem,5vw,3.875rem);line-height:1.04;margin:.6rem 0 1rem}.cm-hero p{color:var(--cm-muted);font-size:1.125rem;margin:0 auto;max-width:47.5rem}.cm-section{padding:4.25rem 0}.cm-section:nth-of-type(even){background:var(--cm-ice)}.cm-intro{color:var(--cm-muted);font-size:1.125rem;max-width:50rem}
-.cm-grid{display:grid;gap:1.125rem;grid-template-columns:repeat(2,minmax(0,1fr));margin-top:1.75rem}.cm-card{background:var(--cm-white);border:1px solid var(--cm-border);padding:1.875rem;position:relative}.cm-card--featured{border-top:4px solid var(--cm-secondary)}.cm-card h3{font-size:1.375rem;line-height:1.2;margin:0 0 .5rem}.cm-card h3 span{font-size:.78em}.cm-card p{color:var(--cm-muted);margin:.5rem 0}.cm-price{color:var(--cm-primary);font-family:var(--cm-heading-font),Georgia,serif;font-size:1.75rem;margin:.625rem 0 .875rem}.cm-price small{color:var(--cm-muted);font-family:var(--cm-body-font),Arial,sans-serif;font-size:.8125rem}.cm-note{font-size:.8125rem}.cm-card-cta{margin-top:1.125rem}
-.cm-button{border-radius:3px;display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:.04em;min-height:2.75rem;padding:.8125rem 1.25rem;text-align:center;text-decoration:none;transition:filter .2s ease,transform .2s ease}.cm-button:hover{filter:brightness(.92);transform:translateY(-1px)}.cm-button:focus-visible{outline:3px solid var(--cm-accent);outline-offset:3px}.cm-button--primary{background:var(--cm-secondary);color:var(--cm-white)}.cm-button--secondary{background:transparent;border:1px solid var(--cm-secondary);color:var(--cm-secondary)}
-.cm-panel{background:var(--cm-ice);border:1px solid var(--cm-border);margin-top:1.25rem;padding:2.625rem}.cm-panel+.cm-panel{margin-top:1.5rem}.cm-panel h2{font-size:2.25rem}.cm-discount{color:var(--cm-primary);font-family:var(--cm-heading-font),Georgia,serif;font-size:2.125rem;font-weight:600}.cm-terms{background:var(--cm-cream);padding:4.0625rem 0}.cm-terms ul{margin:1.5625rem auto 0;max-width:56.25rem;padding-left:1.375rem}.cm-terms li{color:var(--cm-muted);margin:.625rem 0}.cm-quote{color:var(--cm-primary);font-family:var(--cm-heading-font),Georgia,serif;font-size:1.375rem;line-height:1.45}.cm-terms ul+.cm-quote{margin-top:2.1875rem}.cm-final{background:var(--cm-primary);color:var(--cm-white);padding:5.5rem 0;text-align:center}.cm-final h2{color:var(--cm-white)}.cm-final p{font-family:var(--cm-heading-font),Georgia,serif;font-size:1.5625rem}
-@media(max-width:800px){.react-page{font-size:15px}.cm-container{padding:0 1.25rem;width:100%}.cm-hero{padding:3rem 0 2.625rem;text-align:left}.cm-hero h1{font-size:2.4375rem}.cm-hero p{font-size:1rem;line-height:1.65}.cm-section{padding:3.25rem 0}.react-page h2{font-size:1.9375rem;line-height:1.1}.cm-intro{font-size:1rem;line-height:1.65}.cm-grid{gap:.875rem;grid-template-columns:1fr;margin-top:1.5rem}.cm-card{padding:1.4375rem 1.25rem}.cm-card h3{font-size:1.1875rem}.cm-price{font-size:1.6875rem}.cm-card p{line-height:1.65}.cm-button{width:100%}.cm-panel{padding:1.75rem 1.25rem}.cm-panel h2{font-size:1.8125rem}.cm-discount{font-size:1.875rem}.cm-terms{padding:3.25rem 0}.cm-terms li{line-height:1.6;margin:.75rem 0}.cm-quote{font-size:1.25rem}.cm-final{padding:3.875rem 0}.cm-final p{font-size:1.375rem}}
+.module-example {
+  border: 1px solid #d0d7de;
+  border-radius: 0.5rem;
+  color: #24292f;
+  font-family: system-ui, sans-serif;
+  margin: 1rem auto;
+  max-width: 40rem;
+  padding: 1.5rem;
+}
+
+.module-example h1 {
+  font-size: 1.5rem;
+  margin: 0 0 0.5rem;
+}
+
+.module-example p {
+  line-height: 1.5;
+  margin: 0;
+}

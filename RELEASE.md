@@ -1,61 +1,30 @@
 # Plugin releases
 
-`package.json` is the single source of truth for the plugin version. Packaging
-injects that version into the WordPress plugin header, asset cache version, and
-readme before creating the ZIP. Source files use `__PLUGIN_VERSION__` tokens and
-should not be distributed directly.
+`module.config.json` is the source of truth for the plugin identity, WordPress
+requirements, PHP prefix, and release repository. `package.json` remains the
+source of truth for the plugin version. Packaging injects the version into the
+plugin entry and readme before creating the ZIP.
 
-## Create a release
+## Create and publish a release
 
-Choose the appropriate semantic-version increment:
-
-```sh
-npm run version:patch
-npm run version:minor
-npm run version:major
-```
-
-Then package the current version:
+Run `npm run setup` when creating a module from this template. Commit the
+generated identity and all feature changes before deploying. For each release:
 
 ```sh
+npm run build
 npm run package
-```
-
-The result is written to `release/claudia-maria-wp-react-<version>.zip`. The
-folder inside the archive remains `claudia-maria-wp-react`, allowing WordPress
-to update the existing plugin rather than install a separate copy.
-
-Commit `package.json` and `package-lock.json` together after changing a version.
-Create a matching Git tag (for example, `v1.0.1`) when the release is approved.
-
-## Publish to the release repository
-
-GitHub Actions publishes release assets to
-`alexbran8/claudia-maria-web-components-releases`. Add a fine-grained personal
-access token to this source repository as an Actions secret named
-`RELEASE_REPO_TOKEN`. The token needs read/write access to the Contents
-permission of the release repository.
-
-Make sure `claudia-maria-web-components-releases` has a `main` branch with at
-least one initial commit. It can contain only a README; application source code
-is not needed.
-
-To publish a patch release from a clean working tree, run:
-
-```sh
+git add .
+git commit -m "Describe module changes"
 npm run deploy
 ```
 
-The deploy script increments the patch version, commits `package.json` and
-`package-lock.json`, creates the matching `v` tag, and explicitly pushes both
-`main` and the tag. Commit all feature changes before running it.
+`npm run deploy` selects the exact release version, commits the version
+change, creates a matching `v` tag, and pushes the current branch and tag.
+Choose the minor, major, or custom option in the prompt when needed. GitHub
+Actions builds the plugin and publishes `<slug>.zip` and `update.json` to
+`module.config.json`'s `releaseRepository`.
 
-The workflow verifies that the Git tag and package version match, builds the
-plugin, and publishes these two assets:
-
-- `claudia-maria-wp-react.zip`
-- `update.json`
-
-The stable manifest URL is:
-
-`https://github.com/alexbran8/claudia-maria-web-components-releases/releases/latest/download/update.json`
+The release workflow can publish to the same repository without a secret. If
+the release repository is separate, configure `RELEASE_REPO_TOKEN` in the
+source repository's Actions secrets with release-write permission on the
+release repository.

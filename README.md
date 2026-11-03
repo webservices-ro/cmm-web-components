@@ -12,6 +12,8 @@ npm run setup
 npm install
 npm run build
 npm run package
+git add .
+git commit -m "Scaffold module"
 npm run deploy
 ```
 
@@ -19,7 +21,8 @@ npm run deploy
 function prefix, GitHub owner, and release repository. It updates the shared
 configuration, package metadata, generated plugin entry file, and plugin
 readme. The release repository defaults to the current GitHub owner and plugin
-slug.
+slug. Commit the generated configuration and source before deploying;
+`npm run deploy` intentionally requires a clean working tree.
 
 Each independently installed plugin must use its own slug, `Update URI`, and
 PHP prefix. PHP functions share a global namespace across all plugins; never

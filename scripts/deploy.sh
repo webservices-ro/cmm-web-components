@@ -42,18 +42,10 @@ release_choice=$(node scripts/select-release.mjs \
   "Enter another exact release tag")
 
 case "$release_choice" in
-  1)
-    version_bump=$patch_version
-    ;;
-  2)
-    version_bump=$minor_version
-    ;;
-  3)
-    version_bump=$major_version
-    ;;
-  4)
-    version_bump=$next_prerelease_version
-    ;;
+  1) version_bump=$patch_version ;;
+  2) version_bump=$minor_version ;;
+  3) version_bump=$major_version ;;
+  4) version_bump=$next_prerelease_version ;;
   5)
     printf 'Exact release version: '
     IFS= read -r version_bump
@@ -83,4 +75,4 @@ fi
 git add package.json package-lock.json
 git commit -m "Release $release_tag"
 git tag "$release_tag"
-git push origin main "$release_tag"
+git push origin "$(git branch --show-current)" "$release_tag"
