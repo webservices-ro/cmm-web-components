@@ -45,7 +45,7 @@
   text-align: center;
   text-wrap: balance;
 }
-.cmat-intro { margin: 0 auto; max-width: 1180px; padding: clamp(1.5rem,2vw,2rem) max(1.5rem,4vw) clamp(3.5rem,5vw,5rem); }
+.cmat-intro { margin: 0 auto; max-width: 1180px; padding: clamp(1.5rem,2vw,2rem) max(1.5rem,4vw) clamp(1.25rem,2vw,1.75rem); }
 .cmat-section-label {
   color: var(--cmat-green);
   font-size: .72rem !important;
@@ -82,7 +82,7 @@
 }
 .cmat-divider { margin: 0 auto; max-width: 1200px; min-height: 1px; padding: 0 1.5rem; }
 .cmat-divider img { display: block; height: auto; opacity: .78; width: 100%; }
-.cmat-pending { color: var(--cmat-green); font-family: var(--cmat-heading); font-size: clamp(1.5rem,2.4vw,2rem); font-weight: 600; margin: 0; padding: clamp(2.5rem,5vw,4.5rem) 1.5rem 6rem; text-align: center; }
+.cmat-pending { color: var(--cmat-green); font-family: var(--cmat-heading); font-size: clamp(1.5rem,2.4vw,2rem); font-weight: 600; margin: 0; padding: clamp(1.5rem,2vw,2rem) 1.5rem 4rem; text-align: center; }
 .cmat-workshops { margin: 0 auto; max-width: 1180px; padding: clamp(3.75rem,6vw,6rem) max(1.5rem,4vw) 7rem; }
 .cmat-grid { display: grid; gap: 1.15rem; grid-template-columns: repeat(3,minmax(0,1fr)); }
 .cmat-card { background: #fff; border: 1px solid var(--cmat-line); display: flex; flex-direction: column; min-width: 0; overflow: hidden; }
