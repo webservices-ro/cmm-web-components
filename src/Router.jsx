@@ -43,7 +43,7 @@ export default function Router({ config = {} }) {
 
   const page = configuredPage || (path === '/daruri-sacre-2026' ? 'daruri-sacre-2026' : path === '/ateliere-terapeutice' ? 'workshops' : 'index')
 
-  if (page === 'daruri-sacre-2026') return <DaruriSacrePage />
+  if (page === 'daruri-sacre-2026') return <DaruriSacrePage config={config} />
   if (page === 'workshops') return <WorkshopsPage config={config} />
   return <ComponentIndex />
 }

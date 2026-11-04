@@ -293,6 +293,7 @@ add_shortcode('cmat_workshops', 'cmat_render_workshops_shortcode');
 function cmmc_render_component_shortcode($attributes = array()) {
     $attributes = shortcode_atts(array(
         'page' => '',
+        'reservation_url' => '',
     ), $attributes, 'cmm_component');
 
     $page = sanitize_key($attributes['page']);
@@ -315,6 +316,7 @@ function cmmc_render_component_shortcode($attributes = array()) {
 
     $config = array(
         'component' => $page,
+        'reservationUrl' => esc_url_raw($attributes['reservation_url']),
     );
 
     return sprintf(
