@@ -146,7 +146,7 @@ body:has(.component-index) { background: #f4f0e9; margin: 0; }
 
 /* Daruri Sacre 2026 */
 .daruri-page, .daruri-page * { box-sizing: border-box; }
-.single-cmm_atelier .daruri-page { margin-bottom: clamp(1.5rem, 3vw, 3rem); margin-top: clamp(1.5rem, 3vw, 3rem); }
+.single-cmm_atelier .daruri-page { margin-bottom: 0; margin-top: 0; }
 .daruri-page {
   --daruri-cream: #f7f2e9;
   --daruri-gold: #a57d3d;
