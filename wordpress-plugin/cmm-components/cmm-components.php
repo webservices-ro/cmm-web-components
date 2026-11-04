@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Ateliere terapeutice Claudia Maria
+ * Plugin Name: CMM Components
  * Plugin URI: https://github.com/alexbran8/cmm-web-components-releases
  * Description: Pagină permanentă și vitrină WooCommerce pentru atelierele terapeutice Claudia Maria.
  * Version: __PLUGIN_VERSION__
