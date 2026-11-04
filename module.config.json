@@ -2,8 +2,8 @@
   "slug": "cmm-components",
   "name": "CMM Components",
   "phpPrefix": "cmmc",
-  "githubOwner": "owner",
-  "releaseRepository": "owner/cmm-components",
+  "githubOwner": "alexbran8",
+  "releaseRepository": "alexbran8/cmm-web-components-releases",
   "requiresWordPress": "6.0",
   "requiresPhp": "7.4",
   "testedWordPress": "6.8"

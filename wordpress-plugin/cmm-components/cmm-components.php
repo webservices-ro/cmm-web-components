@@ -1,10 +1,10 @@
 <?php
 /**
  * Plugin Name: Ateliere terapeutice Claudia Maria
- * Plugin URI: https://github.com/owner/cmm-components
+ * Plugin URI: https://github.com/alexbran8/cmm-web-components-releases
  * Description: Pagină permanentă și vitrină WooCommerce pentru atelierele terapeutice Claudia Maria.
  * Version: __PLUGIN_VERSION__
- * Update URI: https://github.com/owner/cmm-components
+ * Update URI: https://github.com/alexbran8/cmm-web-components-releases
  * Text Domain: cmm-components
  * Requires at least: 6.0
  * Requires PHP: 7.4
@@ -17,7 +17,7 @@ if (!defined('ABSPATH')) {
 define('CMMC_VERSION', '__PLUGIN_VERSION__');
 define('CMMC_PLUGIN_FILE', __FILE__);
 define('CMMC_PLUGIN_DIR', plugin_dir_path(__FILE__));
-define('CMMC_UPDATE_MANIFEST_URL', 'https://github.com/owner/cmm-components/releases/latest/download/update.json');
+define('CMMC_UPDATE_MANIFEST_URL', 'https://github.com/alexbran8/cmm-web-components-releases/releases/latest/download/update.json');
 
 function cmmc_get_release_data() {
     static $release = null;

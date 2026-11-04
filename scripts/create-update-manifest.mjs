@@ -23,8 +23,8 @@ const manifest = {
   requires_php: config.requiresPhp,
   tested: config.testedWordPress,
   sections: {
-    description: `<p>${pluginName} provides a minimal React module for WordPress.</p>`,
-    installation: `<ol><li>Install and activate the plugin.</li><li>Add the <code>[${config.phpPrefix}]</code> shortcode to a page or post.</li></ol>`,
+    description: `<p>${pluginName} provides the Claudia Maria therapeutic workshops page and its WooCommerce product showcase.</p>`,
+    installation: '<ol><li>Install and activate the plugin.</li><li>The plugin creates the Ateliere terapeutice page and product category automatically.</li><li>Assign workshop products to that WooCommerce category.</li></ol>',
     changelog: `<h4>${packageJson.version}</h4><p>Latest ${pluginName} release.</p>`,
   },
 }

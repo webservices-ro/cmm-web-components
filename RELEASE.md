@@ -28,3 +28,8 @@ The release workflow can publish to the same repository without a secret. If
 the release repository is separate, configure `RELEASE_REPO_TOKEN` in the
 source repository's Actions secrets with release-write permission on the
 release repository.
+
+This module publishes its WordPress update assets to
+`alexbran8/cmm-web-components-releases`. The token must be available in this
+source repository as the Actions secret `RELEASE_REPO_TOKEN` and must grant
+`Contents: Read and write` access to that destination repository.
