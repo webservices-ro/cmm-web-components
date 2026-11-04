@@ -114,6 +114,7 @@
   .cmat-intro__text { column-count: 1; }
   .cmat-intro__text p { line-height: 1.72; }
   .cmat-intro .cmat-signoff { text-align: center; }
+  .cmat-divider { max-width: none; padding: 0; width: 100%; }
   .cmat-grid { grid-template-columns: 1fr; }
   .cmat-card__media { aspect-ratio: 4/3; }
   .cmat-card__actions, .cmat-button { width: 100%; }
