@@ -131,6 +131,19 @@ function cmmc_register_assets() {
     return $handles;
 }
 
+function cmmc_mark_app_script_as_module($tag, $handle, $src) {
+    if ('cmm-components-app' !== $handle) {
+        return $tag;
+    }
+
+    return sprintf(
+        '<script type="module" id="%s-js" src="%s"></script>' . "\n",
+        esc_attr($handle),
+        esc_url($src)
+    );
+}
+add_filter('script_loader_tag', 'cmmc_mark_app_script_as_module', 10, 3);
+
 function cmat_get_workshops_page_id() {
     $page_id = absint(get_option('cmat_workshops_page_id'));
     if ($page_id && 'page' === get_post_type($page_id)) {
