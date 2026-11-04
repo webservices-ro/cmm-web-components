@@ -21,6 +21,12 @@ export default function DaruriSacrePage({ config = {} }) {
           return <h2 className="daruri-heading" key={index}>{block.text}</h2>
         }
         if (block.type === 'subheading') {
+          if (block.text === 'Descoperirea lumii plantelor și a aromelor') {
+            return <h3 className="daruri-subheading daruri-subheading--single-line" key={index}>{block.text}</h3>
+          }
+          if (block.text === 'Reconectare cu propriul corp și cu simțurile') {
+            return <h3 className="daruri-subheading daruri-subheading--single-line" key={index}>{block.text}</h3>
+          }
           return <h3 className="daruri-subheading" key={index}>{block.text}</h3>
         }
         if (block.type === 'listItem') {
@@ -32,6 +38,14 @@ export default function DaruriSacrePage({ config = {} }) {
               <div className="daruri-spacer" aria-hidden="true" key={index}>
                 <img src={images['image4.png']} alt="" loading="lazy" />
               </div>
+            )
+          }
+
+          if (block.images.length === 1 && block.images[0] === 'image17.png') {
+            return (
+              <figure className="daruri-signature" key={index}>
+                <img src={images['image17.png']} alt="Semnătura Claudia Maria Murariu" loading="lazy" />
+              </figure>
             )
           }
 
@@ -57,7 +71,21 @@ export default function DaruriSacrePage({ config = {} }) {
         }
 
         const isLimited = block.text === 'Locurile sunt limitate'
-        return <p className={isEyebrow ? 'daruri-eyebrow' : isLimited ? 'daruri-limited' : undefined} id={isLimited ? 'rezervare' : undefined} key={index}>{block.text}</p>
+        const isConditionsHeading = block.text === 'Condiții de rezervare și anulare'
+        const isConditionTitle = /^\d+\.\s/.test(block.text)
+        const isLegalNotice = block.text === 'Prezentele condiții se aplică fără a aduce atingere drepturilor legale ale consumatorului.'
+        const className = isEyebrow
+          ? 'daruri-eyebrow'
+          : isLimited
+            ? 'daruri-limited'
+            : isConditionsHeading
+              ? 'daruri-conditions-heading'
+              : isConditionTitle
+                ? 'daruri-condition-title'
+                : isLegalNotice
+                  ? 'daruri-legal-notice'
+                : undefined
+        return <p className={className} id={isLimited ? 'rezervare' : undefined} key={index}>{block.text}</p>
       })}
     </main>
   )
