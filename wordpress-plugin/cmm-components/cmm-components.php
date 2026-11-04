@@ -224,6 +224,7 @@ function cmat_render_workshops_shortcode($attributes = array()) {
     }
 
     $config = array(
+        'component' => 'workshops',
         'heroImage' => $hero_image ?: '',
         'dividerImage' => esc_url_raw($attributes['divider_image']),
         'workshops' => cmat_get_workshops(),
@@ -235,6 +236,45 @@ function cmat_render_workshops_shortcode($attributes = array()) {
     );
 }
 add_shortcode('cmat_workshops', 'cmat_render_workshops_shortcode');
+
+/**
+ * Render one of the React pages inside any WordPress post type.
+ *
+ * Usage: [cmm_component page="daruri-sacre-2026"]
+ */
+function cmmc_render_component_shortcode($attributes = array()) {
+    $attributes = shortcode_atts(array(
+        'page' => '',
+    ), $attributes, 'cmm_component');
+
+    $page = sanitize_key($attributes['page']);
+    $allowed_pages = array('daruri-sacre-2026', 'workshops');
+    if (!in_array($page, $allowed_pages, true)) {
+        return '';
+    }
+
+    if ('workshops' === $page) {
+        return cmat_render_workshops_shortcode();
+    }
+
+    $handles = cmmc_register_assets();
+    if ($handles['script']) {
+        wp_enqueue_script($handles['script']);
+    }
+    foreach ($handles['styles'] as $style_handle) {
+        wp_enqueue_style($style_handle);
+    }
+
+    $config = array(
+        'component' => $page,
+    );
+
+    return sprintf(
+        '<div data-cmm-components-root data-config="%s"></div>',
+        esc_attr(wp_json_encode($config, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
+    );
+}
+add_shortcode('cmm_component', 'cmmc_render_component_shortcode');
 
 function cmat_add_body_class($classes) {
     $page_id = cmat_get_workshops_page_id();

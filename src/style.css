@@ -122,3 +122,60 @@
 @media (prefers-reduced-motion: reduce) {
   .cmat-card__media img, .cmat-button { transition: none; }
 }
+
+/* Local component router */
+body:has(.component-index) { background: #f4f0e9; margin: 0; }
+.component-index, .component-index * { box-sizing: border-box; }
+.component-index {
+  color: #243129;
+  font-family: var(--cmat-body);
+  margin: 0 auto;
+  max-width: 1120px;
+  min-height: 100vh;
+  padding: clamp(4rem, 9vw, 8rem) 1.5rem;
+}
+.component-index__label { color: var(--cmat-green); font-size: .75rem; font-weight: 700; letter-spacing: .17em; margin: 0 0 1rem; text-transform: uppercase; }
+.component-index h1 { font-family: var(--cmat-heading); font-size: clamp(3rem, 7vw, 6.5rem); font-weight: 400; line-height: .95; margin: 0 0 clamp(3rem, 7vw, 6rem); }
+.component-index__grid { display: grid; gap: 1rem; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.component-index__grid a { background: #fff; border: 1px solid var(--cmat-line); color: var(--cmat-green-dark); display: flex; flex-direction: column; font-family: var(--cmat-heading); font-size: clamp(1.6rem, 3vw, 2.35rem); gap: .6rem; min-height: 220px; padding: 2rem; text-decoration: none; transition: border-color 180ms ease, transform 180ms ease; }
+.component-index__grid a:hover { border-color: var(--cmat-green); transform: translateY(-3px); }
+.component-index__grid span { color: var(--cmat-muted); font-family: var(--cmat-body); font-size: .85rem; margin-top: auto; }
+
+/* Daruri Sacre 2026 */
+.daruri-page, .daruri-page * { box-sizing: border-box; }
+.daruri-page {
+  --daruri-cream: #f7f2e9;
+  --daruri-gold: #a57d3d;
+  --daruri-wine: #70443e;
+  background: var(--daruri-cream);
+  color: #3d4038;
+  font-family: var(--cmat-body);
+  margin-inline: calc(50% - 50vw);
+  overflow: hidden;
+  padding: clamp(3.5rem, 7vw, 7rem) max(1.25rem, calc((100vw - 920px) / 2)) 6rem;
+  width: 100vw;
+}
+.daruri-page > p, .daruri-heading, .daruri-subheading, .daruri-title { margin-left: auto; margin-right: auto; max-width: 780px; }
+.daruri-title { color: var(--daruri-wine); font-family: var(--cmat-heading); font-size: clamp(3.1rem, 8vw, 7.4rem); font-weight: 400; letter-spacing: -.025em; line-height: .87; margin-bottom: 1.25rem; text-align: center; text-wrap: balance; }
+.daruri-eyebrow { color: var(--daruri-gold); font-family: var(--cmat-heading); font-size: clamp(1.35rem, 3vw, 2rem) !important; font-style: italic; margin-bottom: 2.25rem !important; text-align: center; }
+.daruri-page > p { font-size: clamp(1rem, 1.4vw, 1.1rem); line-height: 1.8; margin-bottom: 1.25rem; margin-top: 0; white-space: pre-line; }
+.daruri-page > p:nth-of-type(2), .daruri-page > p:nth-of-type(3) { color: var(--daruri-wine); font-size: .82rem; font-weight: 700; letter-spacing: .08em; margin-bottom: .3rem; text-align: center; text-transform: uppercase; }
+.daruri-heading { color: var(--daruri-wine); font-family: var(--cmat-heading); font-size: clamp(2.5rem, 5.2vw, 4.5rem); font-weight: 500; line-height: 1; margin-bottom: 1.75rem; margin-top: clamp(4.5rem, 9vw, 8rem); text-align: center; text-wrap: balance; }
+.daruri-subheading { color: var(--daruri-wine); font-family: var(--cmat-heading); font-size: clamp(1.75rem, 3.4vw, 2.65rem); font-weight: 500; line-height: 1.08; margin-bottom: 1.25rem; margin-top: 3.5rem; text-wrap: balance; }
+.daruri-list-item { border-bottom: 1px solid rgba(112, 68, 62, .16); margin-bottom: 0 !important; padding: .8rem 0 .8rem 1.75rem; position: relative; }
+.daruri-list-item::before { color: var(--daruri-gold); content: '✦'; left: 0; position: absolute; }
+.daruri-gallery { display: grid; gap: clamp(.65rem, 1.5vw, 1.1rem); margin: clamp(2.75rem, 6vw, 5.5rem) auto; max-width: 780px; }
+.daruri-gallery--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.daruri-gallery--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.daruri-gallery img { aspect-ratio: 4 / 3; display: block; height: 100%; object-fit: cover; width: 100%; }
+.daruri-gallery--1 img { aspect-ratio: 16 / 9; max-height: 680px; }
+.daruri-cta { background: var(--daruri-wine); color: #fff; font-size: .78rem !important; font-weight: 700; letter-spacing: .14em; margin: 2.75rem auto !important; max-width: max-content !important; padding: 1rem 1.5rem; text-align: center; }
+
+@media (max-width: 680px) {
+  .component-index__grid { grid-template-columns: 1fr; }
+  .component-index__grid a { min-height: 180px; }
+  .daruri-page { padding-left: 1.1rem; padding-right: 1.1rem; }
+  .daruri-gallery--2, .daruri-gallery--3 { grid-template-columns: 1fr; }
+  .daruri-gallery--3 img:nth-child(n + 2) { aspect-ratio: 16 / 10; }
+  .daruri-title { font-size: clamp(3rem, 15vw, 4.8rem); }
+}

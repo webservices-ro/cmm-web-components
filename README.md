@@ -14,6 +14,16 @@ Pentru un atelier nou, creează un produs WooCommerce, completează titlul, desc
 
 Coperta paginii se setează din **Imagine reprezentativă** pe pagina „Ateliere terapeutice”. Până la adăugarea imaginii finale, pagina folosește un fundal neutru. Shortcode-ul acceptă și atributele `hero_image` și `divider_image` dacă imaginile trebuie furnizate explicit prin URL.
 
+## Pagini individuale
+
+Pagina **Daruri Sacre – Ediția 2026** poate fi inclusă într-o pagină, într-o postare sau într-un custom post type cu shortcode-ul:
+
+```text
+[cmm_component page="daruri-sacre-2026"]
+```
+
+Shortcode-ul existent `[cmat_workshops]` continuă să afișeze pagina atelierelor terapeutice.
+
 ## Dezvoltare
 
 Identitatea și metadatele de release sunt definite în [`module.config.json`](./module.config.json).

@@ -6,6 +6,7 @@ import react from '@vitejs/plugin-react'
 const moduleConfig = JSON.parse(readFileSync(new URL('./module.config.json', import.meta.url), 'utf8'))
 
 export default defineConfig({
+  base: './',
   plugins: [react()],
   build: {
     manifest: true,

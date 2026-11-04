@@ -1,5 +1,5 @@
 import { createRoot } from 'react-dom/client'
-import App from './App.jsx'
+import Router from './Router.jsx'
 import moduleConfig from '../module.config.json'
 import './style.css'
 
@@ -12,5 +12,5 @@ document.querySelectorAll(`[data-${moduleConfig.slug}-root]`).forEach((element) 
     console.error('Ateliere terapeutice: configurația paginii nu este validă.', error)
   }
 
-  createRoot(element).render(<App config={config} />)
+  createRoot(element).render(<Router config={config} />)
 })
