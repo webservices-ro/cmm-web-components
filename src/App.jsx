@@ -18,23 +18,8 @@ function WorkshopCard({ workshop }) {
       <div className="cmat-card__body">
         <h3><a href={workshop.url}>{workshop.name}</a></h3>
         {workshop.description && <p className="cmat-card__description">{workshop.description}</p>}
-        <div className="cmat-card__meta">
-          {workshop.priceHtml && (
-            <div className="cmat-card__price" dangerouslySetInnerHTML={{ __html: workshop.priceHtml }} />
-          )}
-          {workshop.reviewsEnabled && (
-            <a className="cmat-card__reviews" href={`${workshop.url}#reviews`}>
-              {workshop.reviewCount > 0
-                ? `${workshop.reviewCount} ${workshop.reviewCount === 1 ? 'recenzie' : 'recenzii'}`
-                : 'Scrie prima recenzie'}
-            </a>
-          )}
-        </div>
         <div className="cmat-card__actions">
           <a className="cmat-button cmat-button--secondary" href={workshop.url}>Vezi prezentarea</a>
-          <a className="cmat-button cmat-button--primary" href={workshop.addToCartUrl || workshop.url} rel="nofollow">
-            {workshop.buttonText || 'Adaugă în coș'}
-          </a>
         </div>
       </div>
     </article>

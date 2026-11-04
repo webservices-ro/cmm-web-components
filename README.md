@@ -3,14 +3,16 @@
 Modul WordPress/React pentru pagina permanentă **Ateliere terapeutice**. La activare:
 
 - creează pagina publică `/ateliere-terapeutice/` cu shortcode-ul `[cmat_workshops]`;
-- creează categoria WooCommerce `ateliere-terapeutice`;
+- înregistrează tipul de conținut **Ateliere** în WordPress;
 - introduce legătura „Ateliere terapeutice” între „Filosofia mea” și „Blog” în meniul care conține aceste două elemente;
-- afișează automat toate produsele publicate din categoria dedicată;
-- păstrează pagina individuală WooCommerce, plata, stocul și recenziile proprii pentru fiecare atelier.
+- afișează automat toate atelierele publicate;
+- păstrează produsele WooCommerce complet separate de prezentarea atelierelor.
 
 ## Administrarea atelierelor
 
-Pentru un atelier nou, creează un produs WooCommerce, completează titlul, descrierea scurtă, prețul, stocul și imaginea produsului, activează recenziile și bifează categoria **Ateliere terapeutice**. Atelierul apare automat în vitrină, fără modificarea paginii.
+Pentru un atelier nou, deschide **Ateliere → Adaugă atelier** în administrarea WordPress. Completează titlul, rezumatul, conținutul și imaginea reprezentativă, apoi publică. Atelierul apare automat în pagina „Ateliere terapeutice”, fără să fie legat de un produs WooCommerce.
+
+Conținutul fiecărui atelier este disponibil la adresa `/atelier/numele-atelierului/`. Poți folosi shortcode-uri de pagină, inclusiv `[cmm_component page="daruri-sacre-2026"]`, direct în conținutul atelierului.
 
 Coperta paginii se setează din **Imagine reprezentativă** pe pagina „Ateliere terapeutice”. Până la adăugarea imaginii finale, pagina folosește un fundal neutru. Shortcode-ul acceptă și atributele `hero_image` și `divider_image` dacă imaginile trebuie furnizate explicit prin URL.
 

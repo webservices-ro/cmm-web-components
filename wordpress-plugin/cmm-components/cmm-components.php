@@ -2,7 +2,7 @@
 /**
  * Plugin Name: CMM Components
  * Plugin URI: https://github.com/alexbran8/cmm-web-components-releases
- * Description: Pagină permanentă și vitrină WooCommerce pentru atelierele terapeutice Claudia Maria.
+ * Description: Pagini și componente pentru atelierele terapeutice Claudia Maria.
  * Version: __PLUGIN_VERSION__
  * Update URI: https://github.com/alexbran8/cmm-web-components-releases
  * Text Domain: cmm-components
@@ -141,13 +141,47 @@ function cmat_get_workshops_page_id() {
     return $page ? (int) $page->ID : 0;
 }
 
-function cmat_activate_plugin() {
-    if (taxonomy_exists('product_cat') && !term_exists('ateliere-terapeutice', 'product_cat')) {
-        wp_insert_term('Ateliere terapeutice', 'product_cat', array(
-            'slug' => 'ateliere-terapeutice',
-            'description' => 'Atelierele afișate automat în pagina Ateliere terapeutice.',
-        ));
+function cmmc_register_workshop_post_type() {
+    register_post_type('cmm_atelier', array(
+        'labels' => array(
+            'name' => 'Ateliere',
+            'singular_name' => 'Atelier',
+            'add_new' => 'Adaugă atelier',
+            'add_new_item' => 'Adaugă atelier nou',
+            'edit_item' => 'Editează atelierul',
+            'new_item' => 'Atelier nou',
+            'view_item' => 'Vezi atelierul',
+            'search_items' => 'Caută ateliere',
+            'not_found' => 'Nu a fost găsit niciun atelier.',
+            'not_found_in_trash' => 'Nu există ateliere în gunoi.',
+            'all_items' => 'Toate atelierele',
+            'menu_name' => 'Ateliere',
+        ),
+        'public' => true,
+        'show_in_rest' => true,
+        'menu_icon' => 'dashicons-palmtree',
+        'supports' => array('title', 'editor', 'excerpt', 'thumbnail', 'page-attributes'),
+        'has_archive' => false,
+        'rewrite' => array(
+            'slug' => 'atelier',
+            'with_front' => false,
+        ),
+    ));
+}
+add_action('init', 'cmmc_register_workshop_post_type');
+
+function cmmc_maybe_flush_workshop_rewrites() {
+    if (get_option('cmmc_rewrite_version') === CMMC_VERSION) {
+        return;
     }
+
+    flush_rewrite_rules();
+    update_option('cmmc_rewrite_version', CMMC_VERSION, false);
+}
+add_action('init', 'cmmc_maybe_flush_workshop_rewrites', 20);
+
+function cmat_activate_plugin() {
+    cmmc_register_workshop_post_type();
 
     $page = get_page_by_path('ateliere-terapeutice');
     if (!$page) {
@@ -164,42 +198,43 @@ function cmat_activate_plugin() {
     } else {
         update_option('cmat_workshops_page_id', (int) $page->ID);
     }
+
+    flush_rewrite_rules();
+    update_option('cmmc_rewrite_version', CMMC_VERSION, false);
 }
 register_activation_hook(CMMC_PLUGIN_FILE, 'cmat_activate_plugin');
 
-function cmat_get_workshops() {
-    if (!function_exists('wc_get_products')) {
-        return array();
-    }
+function cmmc_deactivate_plugin() {
+    flush_rewrite_rules();
+}
+register_deactivation_hook(CMMC_PLUGIN_FILE, 'cmmc_deactivate_plugin');
 
-    $products = wc_get_products(array(
-        'status' => 'publish',
-        'limit' => -1,
-        'category' => array('ateliere-terapeutice'),
+function cmat_get_workshops() {
+    $workshops = get_posts(array(
+        'post_type' => 'cmm_atelier',
+        'post_status' => 'publish',
+        'posts_per_page' => -1,
         'orderby' => 'date',
         'order' => 'DESC',
     ));
 
-    return array_map(static function ($product) {
-        $image_id = $product->get_image_id();
-        $image = $image_id ? wp_get_attachment_image_url($image_id, 'woocommerce_single') : '';
+    return array_map(static function ($workshop) {
+        $image_id = get_post_thumbnail_id($workshop);
+        $image = $image_id ? wp_get_attachment_image_url($image_id, 'large') : '';
         $image_alt = $image_id ? get_post_meta($image_id, '_wp_attachment_image_alt', true) : '';
-        $can_add_to_cart = $product->is_type('simple') && $product->is_purchasable() && $product->is_in_stock();
+        $description = has_excerpt($workshop)
+            ? get_the_excerpt($workshop)
+            : wp_trim_words(wp_strip_all_tags(strip_shortcodes($workshop->post_content)), 38);
 
         return array(
-            'id' => $product->get_id(),
-            'name' => $product->get_name(),
-            'url' => $product->get_permalink(),
+            'id' => (int) $workshop->ID,
+            'name' => get_the_title($workshop),
+            'url' => get_permalink($workshop),
             'image' => $image ?: '',
-            'imageAlt' => $image_alt ?: $product->get_name(),
-            'description' => wp_trim_words(wp_strip_all_tags($product->get_short_description()), 38),
-            'priceHtml' => wp_kses_post($product->get_price_html()),
-            'addToCartUrl' => $can_add_to_cart ? $product->add_to_cart_url() : $product->get_permalink(),
-            'buttonText' => $can_add_to_cart ? 'Adaugă în coș' : 'Vezi opțiunile',
-            'reviewsEnabled' => (bool) $product->get_reviews_allowed(),
-            'reviewCount' => (int) $product->get_review_count(),
+            'imageAlt' => $image_alt ?: get_the_title($workshop),
+            'description' => $description,
         );
-    }, $products);
+    }, $workshops);
 }
 
 function cmat_render_workshops_shortcode($attributes = array()) {
