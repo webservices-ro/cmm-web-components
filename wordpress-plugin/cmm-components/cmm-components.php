@@ -214,7 +214,7 @@ function cmat_render_workshops_shortcode($attributes = array()) {
 
     $attributes = shortcode_atts(array(
         'hero_image' => '',
-        'divider_image' => '',
+        'divider_image' => 'https://claudiamaria.ro/wp-content/uploads/2026/03/Linie-ornamentala.webp',
     ), $attributes, 'cmat_workshops');
 
     $page_id = get_queried_object_id();

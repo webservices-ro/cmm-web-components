@@ -67,20 +67,15 @@ export default function App({ config = {} }) {
         {config.dividerImage && <img src={config.dividerImage} alt="" loading="lazy" />}
       </div>
 
-      <section className="cmat-workshops" aria-labelledby="cmat-workshops-title">
-        <p className="cmat-section-label">Experiențe botanice</p>
-        <h2 id="cmat-workshops-title">Ateliere disponibile</h2>
-        {workshops.length > 0 ? (
+      {workshops.length > 0 ? (
+        <section className="cmat-workshops" aria-label="Ateliere terapeutice">
           <div className="cmat-grid">
             {workshops.map((workshop) => <WorkshopCard key={workshop.id} workshop={workshop} />)}
           </div>
-        ) : (
-          <div className="cmat-empty">
-            <h3>Ateliere în pregătire</h3>
-            <p>Revenim curând cu primele experiențe botanice terapeutice.</p>
-          </div>
-        )}
-      </section>
+        </section>
+      ) : (
+        <p className="cmat-pending">Atelier în pregătire</p>
+      )}
     </main>
   )
 }
