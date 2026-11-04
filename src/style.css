@@ -45,7 +45,7 @@
   text-align: center;
   text-wrap: balance;
 }
-.cmat-intro { margin: 0 auto; max-width: 1180px; padding: clamp(4.5rem,7vw,7rem) max(1.5rem,4vw) clamp(3.5rem,5vw,5rem); }
+.cmat-intro { margin: 0 auto; max-width: 1180px; padding: clamp(1.5rem,2vw,2rem) max(1.5rem,4vw) clamp(3.5rem,5vw,5rem); }
 .cmat-section-label {
   color: var(--cmat-green);
   font-size: .72rem !important;
