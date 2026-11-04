@@ -10,7 +10,10 @@
 }
 
 .cmat-workshops-page .entry-title,
-.cmat-workshops-page .page-header { display: none !important; }
+.cmat-workshops-page .page-header,
+.single-cmm_atelier .entry-title,
+.single-cmm_atelier .page-header,
+.single-cmm_atelier .wp-block-post-title { display: none !important; }
 .cmat-page, .cmat-page * { box-sizing: border-box; }
 .cmat-page {
   color: var(--cmat-ink);
@@ -98,7 +101,7 @@
 .cmat-card__price { color: var(--cmat-green-dark); font-size: 1.15rem; font-weight: 600; }
 .cmat-card__price del { color: var(--cmat-muted); font-size: .9em; margin-right: .35rem; }
 .cmat-card__reviews { color: var(--cmat-green-soft); font-size: .88rem; text-decoration: underline; text-underline-offset: 3px; }
-.cmat-card__actions { display: flex; flex-wrap: wrap; gap: .65rem; margin-top: 1.5rem; }
+.cmat-card__actions { display: flex; flex-wrap: wrap; gap: .65rem; justify-content: center; margin-top: 1.5rem; }
 .cmat-button { border: 1px solid var(--cmat-green); border-radius: 3px; font-size: .72rem; font-weight: 700; letter-spacing: .07em; min-height: 46px; padding: .82rem 1rem; text-align: center; text-decoration: none; text-transform: uppercase; transition: background-color 180ms ease,color 180ms ease; }
 .cmat-button--primary, .cmat-button--secondary:hover { background: var(--cmat-green); color: #fff; }
 .cmat-button--secondary, .cmat-button--primary:hover { background: transparent; color: var(--cmat-green); }
@@ -152,7 +155,7 @@ body:has(.component-index) { background: #f4f0e9; margin: 0; }
   font-family: var(--cmat-body);
   margin-inline: calc(50% - 50vw);
   overflow: hidden;
-  padding: clamp(2.5rem, 4vw, 4rem) max(1.25rem, calc((100vw - 920px) / 2)) 3.5rem;
+  padding: clamp(2.5rem, 4vw, 4rem) max(1.25rem, calc((100vw - 920px) / 2)) 1rem;
   width: 100vw;
 }
 .daruri-page > p, .daruri-heading, .daruri-subheading, .daruri-title { margin-left: auto; margin-right: auto; max-width: 780px; }
@@ -160,6 +163,7 @@ body:has(.component-index) { background: #f4f0e9; margin: 0; }
 .daruri-eyebrow { color: var(--daruri-gold); font-family: var(--cmat-heading); font-size: clamp(1.35rem, 3vw, 2rem) !important; font-style: italic; margin-bottom: 2.25rem !important; text-align: center; }
 .daruri-page > p { font-size: clamp(1rem, 1.4vw, 1.1rem); line-height: 1.8; margin-bottom: 1.25rem; margin-top: 0; white-space: pre-line; }
 .daruri-page > p:nth-of-type(2), .daruri-page > p:nth-of-type(3) { color: var(--daruri-wine); font-size: .82rem; font-weight: 700; letter-spacing: .08em; margin-bottom: .3rem; text-align: center; text-transform: uppercase; }
+.daruri-page > .daruri-event-meta { background: rgba(165, 125, 61, .12); color: var(--daruri-wine); font-family: var(--cmat-heading); font-size: clamp(1.2rem, 2.3vw, 1.55rem); font-weight: 700; letter-spacing: .03em; margin-bottom: .35rem; padding: .65rem 1rem; text-align: center; text-transform: none; }
 .daruri-heading { color: var(--daruri-wine); font-family: var(--cmat-heading); font-size: clamp(2.5rem, 5.2vw, 4.5rem); font-weight: 500; line-height: 1; margin-bottom: 1.4rem; margin-top: clamp(2.75rem, 5vw, 4.5rem); text-align: center; text-wrap: balance; }
 .daruri-subheading { color: var(--daruri-wine); font-family: var(--cmat-heading); font-size: clamp(1.75rem, 3.4vw, 2.65rem); font-weight: 500; line-height: 1.08; margin-bottom: 1rem; margin-top: 2.25rem; text-wrap: balance; }
 .daruri-subheading--single-line { font-size: clamp(1.65rem, 2.8vw, 2.25rem); white-space: nowrap; }
@@ -180,7 +184,7 @@ body:has(.component-index) { background: #f4f0e9; margin: 0; }
 .daruri-limited { color: var(--daruri-wine); font-family: var(--cmat-heading); font-size: clamp(1.25rem, 2.2vw, 1.65rem) !important; font-style: italic; font-weight: 600; margin-bottom: clamp(2.5rem, 4vw, 4rem) !important; text-align: center; }
 .daruri-conditions-heading { color: var(--daruri-wine); font-weight: 700; margin-top: 2.5rem !important; }
 .daruri-condition-title { color: var(--daruri-wine); font-weight: 700; margin-bottom: .75rem !important; margin-top: 1.75rem !important; }
-.daruri-legal-notice { color: #111; font-weight: 700; }
+.daruri-legal-notice { color: #111; font-weight: 700; margin-bottom: 0 !important; }
 
 @media (max-width: 680px) {
   .component-index__grid { grid-template-columns: 1fr; }

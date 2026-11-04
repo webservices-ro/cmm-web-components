@@ -74,6 +74,7 @@ export default function DaruriSacrePage({ config = {} }) {
         const isConditionsHeading = block.text === 'Condiții de rezervare și anulare'
         const isConditionTitle = /^\d+\.\s/.test(block.text)
         const isLegalNotice = block.text === 'Prezentele condiții se aplică fără a aduce atingere drepturilor legale ale consumatorului.'
+        const isEventMeta = block.text === '12 decembrie 2026 · București · 5 ore' || block.text === 'Interval orar 10:00- 15:00'
         const className = isEyebrow
           ? 'daruri-eyebrow'
           : isLimited
@@ -84,6 +85,8 @@ export default function DaruriSacrePage({ config = {} }) {
                 ? 'daruri-condition-title'
                 : isLegalNotice
                   ? 'daruri-legal-notice'
+                  : isEventMeta
+                    ? 'daruri-event-meta'
                 : undefined
         return <p className={className} id={isLimited ? 'rezervare' : undefined} key={index}>{block.text}</p>
       })}
