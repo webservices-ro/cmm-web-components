@@ -356,7 +356,7 @@ function cmmc_get_daruri_sacre_order_items($order) {
 }
 
 /**
- * Send the workshop confirmation once WooCommerce confirms payment.
+ * Send the workshop confirmation once WooCommerce completes the order.
  *
  * WC_Mailer::wrap_message() deliberately uses the shop's current WooCommerce
  * email header, footer and styles instead of introducing a separate design.
@@ -430,19 +430,14 @@ function cmmc_send_daruri_sacre_confirmation_email($order_id) {
         $order->add_order_note('E-mailul personalizat de confirmare Daruri Sacre a fost trimis.');
     }
 }
-add_action('woocommerce_payment_complete', 'cmmc_send_daruri_sacre_confirmation_email');
 
 /**
- * Treat paid Processing and Completed orders as confirmed orders.
+ * Send only when the order reaches the Completed status.
  */
 function cmmc_maybe_send_daruri_sacre_confirmation_email($order_id, $old_status, $new_status, $order) {
     unset($old_status);
 
-    if (
-        !in_array($new_status, array('processing', 'completed'), true)
-        || !is_a($order, 'WC_Order')
-        || !$order->get_date_paid()
-    ) {
+    if ('completed' !== $new_status || !is_a($order, 'WC_Order')) {
         return;
     }
 
