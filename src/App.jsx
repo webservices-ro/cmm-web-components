@@ -19,7 +19,7 @@ function WorkshopCard({ workshop }) {
         <h3><a href={workshop.url}>{workshop.name}</a></h3>
         {workshop.description && <p className="cmat-card__description">{workshop.description}</p>}
         <div className="cmat-card__actions">
-          <a className="cmat-button cmat-button--secondary" href={workshop.url}>Vezi prezentarea</a>
+          <a className="cmat-button cmat-button--secondary" href={workshop.url}>Vezi detaliile atelierului</a>
         </div>
       </div>
     </article>
