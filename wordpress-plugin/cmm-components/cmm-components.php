@@ -394,33 +394,45 @@ function cmmc_send_daruri_sacre_confirmation_email($order_id) {
 
     ob_start();
     ?>
-    <p><?php echo $greeting; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
-    <p>Îți mulțumesc pentru înscriere și pentru alegerea de a lua parte la <strong>Daruri Sacre – Ediția 2026</strong>.</p>
-    <p>Mă bucur că ne vom întâlni pe 12 decembrie, într-un spațiu dedicat aromelor botanice, creativității și reconectării senzoriale.</p>
-    <h2>Locul tău este rezervat!</h2>
-    <p>Iată detaliile întâlnirii noastre:</p>
-    <table cellspacing="0" cellpadding="6" style="width:100%; border:1px solid #e5e5e5; margin-bottom:24px;" border="1" bordercolor="#e5e5e5">
+    <div style="background-color:#f7f2e9; border:1px solid #e3d7c7; color:#37332f; padding:36px 32px;">
+    <h1 style="color:#70443e; font-family:Georgia, 'Times New Roman', serif; font-size:34px; font-weight:400; line-height:1.15; margin:0 0 20px; text-align:center;">Atelier de parfumerie botanică și reconectare senzorială</h1>
+    <p style="background-color:#eee4d3; color:#70443e; font-family:Georgia, 'Times New Roman', serif; font-size:18px; font-weight:700; margin:0 0 30px; padding:12px 16px; text-align:center;">12 decembrie 2026 · București · 10:00–15:00</p>
+    <p style="line-height:1.7;"><?php echo $greeting; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
+    <p style="line-height:1.7;">Îți mulțumesc pentru înscriere și pentru alegerea de a lua parte la <strong>Daruri Sacre – Ediția 2026</strong>.</p>
+    <p style="line-height:1.7;">Mă bucur că ne vom întâlni pe 12 decembrie, într-un spațiu dedicat aromelor botanice, creativității și reconectării senzoriale.</p>
+    <h2 style="color:#70443e; font-family:Georgia, 'Times New Roman', serif; font-size:27px; line-height:1.25; margin:30px 0 12px;">Locul tău este rezervat!</h2>
+    <p style="line-height:1.7;">Iată detaliile întâlnirii noastre:</p>
+    <table cellspacing="0" cellpadding="10" style="background-color:#fffdf9; border:1px solid #d8c7b5; border-collapse:collapse; margin:0 0 28px; width:100%;" border="1" bordercolor="#d8c7b5">
         <tr>
-            <td colspan="2"><strong>DARURI SACRE – EDIȚIA 2026</strong><br>Atelier de parfumerie botanică și reconectare senzorială</td>
+            <td colspan="2" style="background-color:#70443e; color:#ffffff; padding:15px;"><strong>DARURI SACRE – EDIȚIA 2026</strong><br><span style="font-size:14px;">Atelier de parfumerie botanică și reconectare senzorială</span></td>
         </tr>
-        <tr><th scope="row" style="text-align:left;">Data</th><td>12 decembrie 2026</td></tr>
-        <tr><th scope="row" style="text-align:left;">Interval orar</th><td>10:00–15:00</td></tr>
-        <tr><th scope="row" style="text-align:left;">Locația</th><td>București</td></tr>
-        <tr><th scope="row" style="text-align:left;">Contribuție achitată</th><td><?php echo wp_kses_post($formatted_contribution); ?></td></tr>
-        <tr><th scope="row" style="text-align:left;">Status rezervare</th><td><strong>Confirmată</strong></td></tr>
+        <tr><th scope="row" style="color:#70443e; text-align:left; width:44%;">Data</th><td>12 decembrie 2026</td></tr>
+        <tr><th scope="row" style="color:#70443e; text-align:left;">Interval orar</th><td>10:00–15:00</td></tr>
+        <tr><th scope="row" style="color:#70443e; text-align:left;">Locația</th><td>București</td></tr>
+        <tr><th scope="row" style="color:#70443e; text-align:left;">Contribuție achitată</th><td><?php echo wp_kses_post($formatted_contribution); ?></td></tr>
+        <tr><th scope="row" style="color:#70443e; text-align:left;">Status rezervare</th><td><strong style="color:#386641;">Confirmată</strong></td></tr>
     </table>
-    <p>Te rog să păstrezi acest e-mail ca dovadă a rezervării.</p>
-    <p>Dacă, din motive personale, nu vei mai putea participa, te rog să mă informezi în scris. Se aplică condițiile de rezervare și anulare prezentate pe pagina atelierului<?php if ($conditions_url) : ?>, pe care le poți consulta <a href="<?php echo esc_url($conditions_url); ?>">aici</a><?php endif; ?>.</p>
-    <p>Înainte de eveniment îți voi trimite un nou mesaj cu adresa exactă, câteva informații practice și toate detaliile de care ai nevoie pentru întâlnirea noastră.</p>
-    <p>Până atunci, îți doresc să păstrezi puțin din curiozitatea și bucuria cu care ai ales această experiență. Dacă între timp ai întrebări pentru mine, sunt la un e-mail distanță.</p>
-    <p>Abia aștept să ne întâlnim și să descoperim împreună universul fascinant al aromelor botanice.</p>
-    <p>Cu bucurie,<br><strong>Claudia Maria Munariu</strong></p>
-    <p><em>Onorează natura din tine!</em></p>
+    <p style="line-height:1.7;">Te rog să păstrezi acest e-mail ca dovadă a rezervării.</p>
+    <p style="line-height:1.7;">Dacă, din motive personale, nu vei mai putea participa, te rog să mă informezi în scris. Se aplică condițiile de rezervare și anulare prezentate pe pagina atelierului<?php if ($conditions_url) : ?>, pe care le poți consulta <a style="color:#70443e; font-weight:700;" href="<?php echo esc_url($conditions_url); ?>">aici</a><?php endif; ?>.</p>
+    <p style="line-height:1.7;">Înainte de eveniment îți voi trimite un nou mesaj cu adresa exactă, câteva informații practice și toate detaliile de care ai nevoie pentru întâlnirea noastră.</p>
+    <p style="line-height:1.7;">Până atunci, îți doresc să păstrezi puțin din curiozitatea și bucuria cu care ai ales această experiență. Dacă între timp ai întrebări pentru mine, sunt la un e-mail distanță.</p>
+    <p style="line-height:1.7;">Abia aștept să ne întâlnim și să descoperim împreună universul fascinant al aromelor botanice.</p>
+    <?php if ($conditions_url) : ?>
+        <p style="margin:30px 0; text-align:center;"><a style="background-color:#70443e; color:#ffffff; display:inline-block; font-size:12px; font-weight:700; letter-spacing:1px; padding:16px 24px; text-decoration:none; text-transform:uppercase;" href="<?php echo esc_url($conditions_url); ?>">Descoperă atelierul</a></p>
+    <?php endif; ?>
+    <p style="line-height:1.7; margin-bottom:4px;">Cu bucurie,<br><strong style="color:#70443e;">Claudia Maria Munariu</strong></p>
+    <p style="color:#70443e; font-family:Georgia, 'Times New Roman', serif; font-size:17px; font-style:italic; margin-bottom:0;">Onorează natura din tine!</p>
+    </div>
     <?php
     $content = ob_get_clean();
     $mailer = WC()->mailer();
-    $heading = 'Locul tău este rezervat!';
+    $heading = 'Daruri Sacre – Ediția 2026';
+    $footer_text_filter = static function () {
+        return (string) wp_parse_url(home_url(), PHP_URL_HOST);
+    };
+    add_filter('woocommerce_email_footer_text', $footer_text_filter, 100);
     $message = $mailer->wrap_message($heading, $content);
+    remove_filter('woocommerce_email_footer_text', $footer_text_filter, 100);
     $email = new WC_Email();
     $message = $email->style_inline($message);
     $subject = 'Confirmarea rezervării tale la Daruri Sacre – Ediția 2026';
