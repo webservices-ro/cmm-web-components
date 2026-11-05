@@ -184,13 +184,13 @@ body:has(.component-index) { background: #f4f0e9; margin: 0; }
 .daruri-cta:hover, .daruri-cta:focus-visible { background: transparent; color: var(--daruri-wine); }
 .daruri-limited { color: var(--daruri-wine); font-family: var(--cmat-heading); font-size: clamp(1.25rem, 2.2vw, 1.65rem) !important; font-style: italic; font-weight: 600; margin-bottom: clamp(2.5rem, 4vw, 4rem) !important; text-align: center; }
 .daruri-conditions { border-bottom: 1px solid rgba(112, 68, 62, .24); border-top: 1px solid rgba(112, 68, 62, .24); margin: 2.5rem auto 0; max-width: 780px; }
-.daruri-conditions > summary, .daruri-condition > summary { align-items: center; color: var(--daruri-wine); cursor: pointer; display: flex; font-weight: 700; gap: 1rem; justify-content: space-between; list-style: none; }
-.daruri-conditions > summary { padding: 1.15rem 0; }
+.daruri-conditions > h2 { color: var(--daruri-wine); font-size: 1rem; font-weight: 700; margin: 0; padding: 1.15rem 0; }
+.daruri-condition > summary { align-items: center; color: var(--daruri-wine); cursor: pointer; display: flex; font-weight: 700; gap: 1rem; justify-content: space-between; list-style: none; }
 .daruri-condition > summary { padding: 1rem; }
-.daruri-conditions > summary::-webkit-details-marker, .daruri-condition > summary::-webkit-details-marker { display: none; }
-.daruri-conditions > summary::after, .daruri-condition > summary::after { border-bottom: 2px solid currentColor; border-right: 2px solid currentColor; content: ''; flex: 0 0 auto; height: .55rem; margin: 0 .35rem .3rem 0; transform: rotate(45deg); transition: transform 180ms ease; width: .55rem; }
-.daruri-conditions[open] > summary::after, .daruri-condition[open] > summary::after { margin-bottom: -.3rem; transform: rotate(225deg); }
-.daruri-conditions > summary:focus-visible, .daruri-condition > summary:focus-visible { outline: 2px solid var(--daruri-gold); outline-offset: 4px; }
+.daruri-condition > summary::-webkit-details-marker { display: none; }
+.daruri-condition > summary::after { border-bottom: 2px solid currentColor; border-right: 2px solid currentColor; content: ''; flex: 0 0 auto; height: .55rem; margin: 0 .35rem .3rem 0; transform: rotate(45deg); transition: transform 180ms ease; width: .55rem; }
+.daruri-condition[open] > summary::after { margin-bottom: -.3rem; transform: rotate(225deg); }
+.daruri-condition > summary:focus-visible { outline: 2px solid var(--daruri-gold); outline-offset: 4px; }
 .daruri-conditions__content { padding: 0 0 1.25rem; }
 .daruri-condition { border-top: 1px solid rgba(112, 68, 62, .16); }
 .daruri-condition__content { padding: 0 1rem .25rem; }
