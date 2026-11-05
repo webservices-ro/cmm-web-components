@@ -30,6 +30,12 @@ Pentru a lega butonul de rezervare la o pagină sau la un produs, folosește atr
 [cmm_component page="daruri-sacre-2026" reservation_url="https://example.com/rezervare/"]
 ```
 
+Descrierea compactă Daruri Sacre poate fi introdusă în descrierea produsului WooCommerce astfel:
+
+```text
+[cmm_component page="daruri-sacre-product-description" presentation_url="https://example.com/atelier/daruri-sacre-2026/"]
+```
+
 Shortcode-ul existent `[cmat_workshops]` continuă să afișeze pagina atelierelor terapeutice.
 
 ## Dezvoltare

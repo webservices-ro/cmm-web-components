@@ -187,6 +187,44 @@ body:has(.component-index) { background: #f4f0e9; margin: 0; }
 .daruri-condition-title { color: var(--daruri-wine); font-weight: 700; margin-bottom: .75rem !important; margin-top: 1.75rem !important; }
 .daruri-legal-notice { color: #111; font-weight: 700; margin-bottom: 0 !important; }
 
+/* Compact Daruri Sacre component for WooCommerce product descriptions */
+.daruri-product, .daruri-product * { box-sizing: border-box; }
+.daruri-product {
+  background: var(--daruri-cream, #f7f2e9);
+  border: 1px solid rgba(112, 68, 62, .16);
+  color: #3d4038;
+  font-family: var(--cmat-body);
+  margin: 1.5rem auto;
+  max-width: 780px;
+  padding: clamp(1.5rem, 4vw, 3rem);
+}
+.daruri-product h2 {
+  color: #70443e;
+  font-family: var(--cmat-heading);
+  font-size: clamp(2rem, 4.5vw, 3.5rem);
+  font-weight: 500;
+  line-height: 1.02;
+  margin: 0 0 1rem;
+  text-align: center;
+  text-wrap: balance;
+}
+.daruri-product p { font-size: 1rem; line-height: 1.75; margin: 0 0 1.15rem; }
+.daruri-product .daruri-product__meta {
+  background: rgba(165, 125, 61, .12);
+  color: #70443e;
+  font-family: var(--cmat-heading);
+  font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  padding: .65rem 1rem;
+  text-align: center;
+}
+.daruri-product__lead { color: #70443e; font-family: var(--cmat-heading); font-size: clamp(1.2rem, 2.5vw, 1.55rem) !important; font-style: italic; font-weight: 600; line-height: 1.5 !important; }
+.daruri-product__closing { color: #111; font-weight: 700; }
+.daruri-product__action { display: flex; justify-content: center; margin-top: 1.75rem; }
+.daruri-product__action a { background: #70443e; border: 1px solid #70443e; color: #fff; display: inline-flex; font-size: .78rem; font-weight: 700; justify-content: center; letter-spacing: .12em; min-height: 52px; padding: 1rem 1.5rem; text-decoration: none; text-transform: uppercase; transition: background-color 180ms ease, color 180ms ease; }
+.daruri-product__action a:hover, .daruri-product__action a:focus-visible { background: transparent; color: #70443e; }
+
 @media (max-width: 680px) {
   .component-index__grid { grid-template-columns: 1fr; }
   .component-index__grid a { min-height: 180px; }

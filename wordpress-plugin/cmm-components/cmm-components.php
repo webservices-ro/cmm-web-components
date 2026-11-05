@@ -294,10 +294,11 @@ function cmmc_render_component_shortcode($attributes = array()) {
     $attributes = shortcode_atts(array(
         'page' => '',
         'reservation_url' => '',
+        'presentation_url' => '',
     ), $attributes, 'cmm_component');
 
     $page = sanitize_key($attributes['page']);
-    $allowed_pages = array('daruri-sacre-2026', 'workshops');
+    $allowed_pages = array('daruri-sacre-2026', 'daruri-sacre-product-description', 'workshops');
     if (!in_array($page, $allowed_pages, true)) {
         return '';
     }
@@ -317,6 +318,7 @@ function cmmc_render_component_shortcode($attributes = array()) {
     $config = array(
         'component' => $page,
         'reservationUrl' => esc_url_raw($attributes['reservation_url']),
+        'presentationUrl' => esc_url_raw($attributes['presentation_url']),
     );
 
     return sprintf(

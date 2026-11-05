@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import WorkshopsPage from './App.jsx'
+import DaruriProductDescription from './DaruriProductDescription.jsx'
 import DaruriSacrePage from './DaruriSacrePage.jsx'
 
 const normalizePath = (path) => path.replace(/\/+$/, '') || '/'
@@ -44,6 +45,7 @@ export default function Router({ config = {} }) {
   const page = configuredPage || (path === '/daruri-sacre-2026' ? 'daruri-sacre-2026' : path === '/ateliere-terapeutice' ? 'workshops' : 'index')
 
   if (page === 'daruri-sacre-2026') return <DaruriSacrePage config={config} />
+  if (page === 'daruri-sacre-product-description') return <DaruriProductDescription config={config} />
   if (page === 'workshops') return <WorkshopsPage config={config} />
   return <ComponentIndex />
 }
