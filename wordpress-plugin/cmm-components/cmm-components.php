@@ -421,7 +421,8 @@ function cmmc_send_daruri_sacre_confirmation_email($order_id) {
     $mailer = WC()->mailer();
     $heading = 'Locul tău este rezervat!';
     $message = $mailer->wrap_message($heading, $content);
-    $message = $mailer->style_inline($message);
+    $email = new WC_Email();
+    $message = $email->style_inline($message);
     $subject = 'Confirmarea rezervării tale la Daruri Sacre – Ediția 2026';
 
     if ($mailer->send($recipient, $subject, $message, "Content-Type: text/html\r\n")) {
