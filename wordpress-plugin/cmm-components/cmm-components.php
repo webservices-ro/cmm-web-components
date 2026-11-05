@@ -368,7 +368,7 @@ function cmmc_send_daruri_sacre_confirmation_email($order_id) {
 
     $order = wc_get_order($order_id);
     $items = cmmc_get_daruri_sacre_order_items($order);
-    if (!$order || !$items || 'yes' === $order->get_meta('_cmmc_daruri_confirmation_sent')) {
+    if (!$order || !$items) {
         return;
     }
 
@@ -443,9 +443,9 @@ function cmmc_send_daruri_sacre_confirmation_email($order_id) {
     $subject = 'Confirmarea rezervării tale la Daruri Sacre – Ediția 2026';
 
     if ($mailer->send($recipient, $subject, $message, "Content-Type: text/html\r\n")) {
-        $order->update_meta_data('_cmmc_daruri_confirmation_sent', 'yes');
-        $order->save();
         $order->add_order_note('E-mailul personalizat de confirmare Daruri Sacre a fost trimis.');
+    } else {
+        $order->add_order_note('E-mailul personalizat de confirmare Daruri Sacre nu a putut fi trimis.');
     }
 }
 
