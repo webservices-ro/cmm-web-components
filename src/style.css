@@ -230,7 +230,13 @@ body:has(.component-index) { background: #f4f0e9; margin: 0; }
   .component-index__grid a { min-height: 180px; }
   .daruri-page { padding-left: 1.1rem; padding-right: 1.1rem; }
   .daruri-gallery--2, .daruri-gallery--3 { grid-template-columns: 1fr; }
-  .daruri-gallery--3 img:nth-child(n + 2) { aspect-ratio: 16 / 10; }
+  .daruri-gallery img,
+  .daruri-gallery--1 img,
+  .daruri-gallery--3 img:nth-child(n + 2) {
+    aspect-ratio: auto;
+    height: auto;
+    object-fit: contain;
+  }
   .daruri-title { font-size: clamp(3rem, 15vw, 4.8rem); }
   .daruri-subheading--single-line { white-space: normal; }
 }
