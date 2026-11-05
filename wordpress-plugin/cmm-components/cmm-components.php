@@ -428,13 +428,18 @@ function cmmc_send_daruri_sacre_confirmation_email($order_id) {
     $mailer = WC()->mailer();
     $heading = 'Daruri Sacre – Ediția 2026';
     $footer_text_filter = static function () {
-        return (string) wp_parse_url(home_url(), PHP_URL_HOST);
+        return '';
     };
     add_filter('woocommerce_email_footer_text', $footer_text_filter, 100);
     $message = $mailer->wrap_message($heading, $content);
     remove_filter('woocommerce_email_footer_text', $footer_text_filter, 100);
     $email = new WC_Email();
+    $footer_style_filter = static function ($css) {
+        return $css . "\n#template_footer { display: none !important; }";
+    };
+    add_filter('woocommerce_email_styles', $footer_style_filter, 100);
     $message = $email->style_inline($message);
+    remove_filter('woocommerce_email_styles', $footer_style_filter, 100);
     $subject = 'Confirmarea rezervării tale la Daruri Sacre – Ediția 2026';
 
     if ($mailer->send($recipient, $subject, $message, "Content-Type: text/html\r\n")) {
@@ -457,6 +462,24 @@ function cmmc_maybe_send_daruri_sacre_confirmation_email($order_id, $old_status,
     cmmc_send_daruri_sacre_confirmation_email($order_id);
 }
 add_action('woocommerce_order_status_changed', 'cmmc_maybe_send_daruri_sacre_confirmation_email', 10, 4);
+
+/**
+ * The personalized workshop confirmation replaces WooCommerce's generic
+ * completed-order email for Daruri Sacre orders.
+ */
+function cmmc_disable_completed_order_email_for_daruri_sacre($enabled, $order) {
+    if (cmmc_get_daruri_sacre_order_items($order)) {
+        return false;
+    }
+
+    return $enabled;
+}
+add_filter(
+    'woocommerce_email_enabled_customer_completed_order',
+    'cmmc_disable_completed_order_email_for_daruri_sacre',
+    10,
+    2
+);
 
 function cmat_add_body_class($classes) {
     $page_id = cmat_get_workshops_page_id();
