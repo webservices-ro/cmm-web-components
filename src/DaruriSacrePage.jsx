@@ -7,13 +7,45 @@ const imageModules = import.meta.glob('./assets/daruri-sacre-2026/*', {
 })
 const images = Object.fromEntries(Object.entries(imageModules).map(([path, url]) => [path.split('/').pop(), url]))
 const imageAlt = (index) => `Atmosferă din cadrul atelierului Daruri Sacre ${index + 1}`
+const LEGAL_NOTICE = 'Prezentele condiții se aplică fără a aduce atingere drepturilor legale ale consumatorului.'
 
 export default function DaruriSacrePage({ config = {} }) {
   let imageIndex = 0
+  const conditionsStartIndex = DARURI_BLOCKS.findIndex((block) => block.text === 'Condiții de rezervare și anulare')
+  const conditionBlocks = DARURI_BLOCKS.slice(conditionsStartIndex + 1)
+  const conditionGroups = conditionBlocks.reduce((groups, condition) => {
+    if (/^\d+\.\s/.test(condition.text)) {
+      groups.push({ title: condition.text, paragraphs: [] })
+    } else if (condition.text !== LEGAL_NOTICE && groups.length > 0) {
+      groups.at(-1).paragraphs.push(condition.text)
+    }
+    return groups
+  }, [])
 
   return (
     <main className="daruri-page">
       {DARURI_BLOCKS.map((block, index) => {
+        if (conditionsStartIndex !== -1 && index > conditionsStartIndex) return null
+
+        if (index === conditionsStartIndex) {
+          return (
+            <section className="daruri-conditions" key={index} aria-labelledby="daruri-conditions-title">
+              <h2 id="daruri-conditions-title">Condiții de rezervare și anulare</h2>
+              <div className="daruri-conditions__content">
+                {conditionGroups.map((condition) => (
+                  <details className="daruri-condition" key={condition.title}>
+                    <summary>{condition.title}</summary>
+                    <div className="daruri-condition__content">
+                      {condition.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+                    </div>
+                  </details>
+                ))}
+                <p className="daruri-legal-notice">{LEGAL_NOTICE}</p>
+              </div>
+            </section>
+          )
+        }
+
         if (block.type === 'title') {
           return <h1 className="daruri-title" key={index}>{block.text}</h1>
         }
@@ -71,17 +103,14 @@ export default function DaruriSacrePage({ config = {} }) {
         }
 
         const isLimited = block.text === 'Locurile sunt limitate'
-        const isConditionsHeading = block.text === 'Condiții de rezervare și anulare'
         const isConditionTitle = /^\d+\.\s/.test(block.text)
-        const isLegalNotice = block.text === 'Prezentele condiții se aplică fără a aduce atingere drepturilor legale ale consumatorului.'
+        const isLegalNotice = block.text === LEGAL_NOTICE
         const isEventMeta = block.text === '12 decembrie 2026 · București · 5 ore' || block.text === 'Interval orar 10:00- 15:00'
         const className = isEyebrow
           ? 'daruri-eyebrow'
           : isLimited
             ? 'daruri-limited'
-            : isConditionsHeading
-              ? 'daruri-conditions-heading'
-              : isConditionTitle
+            : isConditionTitle
                 ? 'daruri-condition-title'
                 : isLegalNotice
                   ? 'daruri-legal-notice'

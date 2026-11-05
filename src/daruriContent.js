@@ -439,7 +439,7 @@ export const DARURI_BLOCKS = [
   {
     "type": "gallery",
     "images": [
-      "image16.jpg"
+      "image16-blurred.png"
     ]
   },
   {

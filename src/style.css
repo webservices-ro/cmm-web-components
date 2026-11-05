@@ -183,7 +183,19 @@ body:has(.component-index) { background: #f4f0e9; margin: 0; }
 .daruri-cta { background: var(--daruri-wine); border: 1px solid var(--daruri-wine); color: #fff; display: inline-flex; font-size: .78rem; font-weight: 700; justify-content: center; letter-spacing: .14em; min-height: 52px; padding: 1rem 1.5rem; text-align: center; text-decoration: none; transition: background-color 180ms ease, color 180ms ease; }
 .daruri-cta:hover, .daruri-cta:focus-visible { background: transparent; color: var(--daruri-wine); }
 .daruri-limited { color: var(--daruri-wine); font-family: var(--cmat-heading); font-size: clamp(1.25rem, 2.2vw, 1.65rem) !important; font-style: italic; font-weight: 600; margin-bottom: clamp(2.5rem, 4vw, 4rem) !important; text-align: center; }
-.daruri-conditions-heading { color: var(--daruri-wine); font-weight: 700; margin-top: 2.5rem !important; }
+.daruri-conditions { border-bottom: 1px solid rgba(112, 68, 62, .24); border-top: 1px solid rgba(112, 68, 62, .24); margin: 2.5rem auto 0; max-width: 780px; }
+.daruri-conditions > summary, .daruri-condition > summary { align-items: center; color: var(--daruri-wine); cursor: pointer; display: flex; font-weight: 700; gap: 1rem; justify-content: space-between; list-style: none; }
+.daruri-conditions > summary { padding: 1.15rem 0; }
+.daruri-condition > summary { padding: 1rem; }
+.daruri-conditions > summary::-webkit-details-marker, .daruri-condition > summary::-webkit-details-marker { display: none; }
+.daruri-conditions > summary::after, .daruri-condition > summary::after { border-bottom: 2px solid currentColor; border-right: 2px solid currentColor; content: ''; flex: 0 0 auto; height: .55rem; margin: 0 .35rem .3rem 0; transform: rotate(45deg); transition: transform 180ms ease; width: .55rem; }
+.daruri-conditions[open] > summary::after, .daruri-condition[open] > summary::after { margin-bottom: -.3rem; transform: rotate(225deg); }
+.daruri-conditions > summary:focus-visible, .daruri-condition > summary:focus-visible { outline: 2px solid var(--daruri-gold); outline-offset: 4px; }
+.daruri-conditions__content { padding: 0 0 1.25rem; }
+.daruri-condition { border-top: 1px solid rgba(112, 68, 62, .16); }
+.daruri-condition__content { padding: 0 1rem .25rem; }
+.daruri-condition__content > p, .daruri-conditions__content > p { font-size: clamp(1rem, 1.4vw, 1.1rem); line-height: 1.8; margin-bottom: 1.25rem; margin-top: 0; white-space: pre-line; }
+.daruri-conditions__content > .daruri-legal-notice { border-top: 1px solid rgba(112, 68, 62, .16); margin: 0 !important; padding-top: 1.25rem; }
 .daruri-condition-title { color: var(--daruri-wine); font-weight: 700; margin-bottom: .75rem !important; margin-top: 1.75rem !important; }
 .daruri-legal-notice { color: #111; font-weight: 700; margin-bottom: 0 !important; }
 
