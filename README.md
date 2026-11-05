@@ -42,6 +42,8 @@ Descrierea compactă Daruri Sacre poate fi introdusă în descrierea produsului 
 [cmm_component page="daruri-sacre-product-description" presentation_url="https://example.com/atelier/daruri-sacre-2026/"]
 ```
 
+După confirmarea comenzii pentru produsul WooCommerce cu ID-ul `2047`, clientul primește automat e-mailul personalizat Daruri Sacre. Confirmarea înseamnă că plata este înregistrată, iar comanda are statusul `Processing` sau `Completed`. E-mailul folosește designul curent al e-mailurilor WooCommerce, prenumele de facturare și valoarea achitată din comandă. Trimiterea este înregistrată în notele comenzii și nu se repetă.
+
 Shortcode-ul existent `[cmat_workshops]` continuă să afișeze pagina atelierelor terapeutice.
 
 ## Dezvoltare

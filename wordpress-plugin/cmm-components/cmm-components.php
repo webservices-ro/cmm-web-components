@@ -338,6 +338,118 @@ function cmmc_render_component_shortcode($attributes = array()) {
 }
 add_shortcode('cmm_component', 'cmmc_render_component_shortcode');
 
+/**
+ * Return the Daruri Sacre line items from an order.
+ *
+ * The filter keeps the email reusable if the WooCommerce product is replaced.
+ */
+function cmmc_get_daruri_sacre_order_items($order) {
+    if (!is_a($order, 'WC_Order')) {
+        return array();
+    }
+
+    $product_id = (int) apply_filters('cmmc_daruri_sacre_product_id', 2047);
+    return array_filter($order->get_items('line_item'), static function ($item) use ($product_id) {
+        return $product_id === (int) $item->get_product_id()
+            || $product_id === (int) $item->get_variation_id();
+    });
+}
+
+/**
+ * Send the workshop confirmation once WooCommerce confirms payment.
+ *
+ * WC_Mailer::wrap_message() deliberately uses the shop's current WooCommerce
+ * email header, footer and styles instead of introducing a separate design.
+ */
+function cmmc_send_daruri_sacre_confirmation_email($order_id) {
+    if (!function_exists('wc_get_order') || !function_exists('WC')) {
+        return;
+    }
+
+    $order = wc_get_order($order_id);
+    $items = cmmc_get_daruri_sacre_order_items($order);
+    if (!$order || !$items || 'yes' === $order->get_meta('_cmmc_daruri_confirmation_sent')) {
+        return;
+    }
+
+    $recipient = $order->get_billing_email();
+    if (!$recipient) {
+        return;
+    }
+
+    $first_name = trim($order->get_billing_first_name());
+    if (!$first_name) {
+        $first_name = trim($order->get_shipping_first_name());
+    }
+
+    $contribution = 0.0;
+    foreach ($items as $item) {
+        $contribution += (float) $item->get_total() + (float) $item->get_total_tax();
+    }
+
+    $product_id = (int) apply_filters('cmmc_daruri_sacre_product_id', 2047);
+    $conditions_url = get_permalink($product_id);
+    $greeting = $first_name ? sprintf('Bună, %s,', esc_html($first_name)) : 'Bună,';
+    $formatted_contribution = wc_price($contribution, array('currency' => $order->get_currency()));
+
+    ob_start();
+    ?>
+    <p><?php echo $greeting; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
+    <p>Îți mulțumesc pentru înscriere și pentru alegerea de a lua parte la <strong>Daruri Sacre – Ediția 2026</strong>.</p>
+    <p>Mă bucur că ne vom întâlni pe 12 decembrie, într-un spațiu dedicat aromelor botanice, creativității și reconectării senzoriale.</p>
+    <h2>Locul tău este rezervat!</h2>
+    <p>Iată detaliile întâlnirii noastre:</p>
+    <table cellspacing="0" cellpadding="6" style="width:100%; border:1px solid #e5e5e5; margin-bottom:24px;" border="1" bordercolor="#e5e5e5">
+        <tr>
+            <td colspan="2"><strong>DARURI SACRE – EDIȚIA 2026</strong><br>Atelier de parfumerie botanică și reconectare senzorială</td>
+        </tr>
+        <tr><th scope="row" style="text-align:left;">Data</th><td>12 decembrie 2026</td></tr>
+        <tr><th scope="row" style="text-align:left;">Interval orar</th><td>10:00–15:00</td></tr>
+        <tr><th scope="row" style="text-align:left;">Locația</th><td>București</td></tr>
+        <tr><th scope="row" style="text-align:left;">Contribuție achitată</th><td><?php echo wp_kses_post($formatted_contribution); ?></td></tr>
+        <tr><th scope="row" style="text-align:left;">Status rezervare</th><td><strong>Confirmată</strong></td></tr>
+    </table>
+    <p>Te rog să păstrezi acest e-mail ca dovadă a rezervării.</p>
+    <p>Dacă, din motive personale, nu vei mai putea participa, te rog să mă informezi în scris. Se aplică condițiile de rezervare și anulare prezentate pe pagina atelierului<?php if ($conditions_url) : ?>, pe care le poți consulta <a href="<?php echo esc_url($conditions_url); ?>">aici</a><?php endif; ?>.</p>
+    <p>Înainte de eveniment îți voi trimite un nou mesaj cu adresa exactă, câteva informații practice și toate detaliile de care ai nevoie pentru întâlnirea noastră.</p>
+    <p>Până atunci, îți doresc să păstrezi puțin din curiozitatea și bucuria cu care ai ales această experiență. Dacă între timp ai întrebări pentru mine, sunt la un e-mail distanță.</p>
+    <p>Abia aștept să ne întâlnim și să descoperim împreună universul fascinant al aromelor botanice.</p>
+    <p>Cu bucurie,<br><strong>Claudia Maria Munariu</strong></p>
+    <p><em>Onorează natura din tine!</em></p>
+    <?php
+    $content = ob_get_clean();
+    $mailer = WC()->mailer();
+    $heading = 'Locul tău este rezervat!';
+    $message = $mailer->wrap_message($heading, $content);
+    $message = $mailer->style_inline($message);
+    $subject = 'Confirmarea rezervării tale la Daruri Sacre – Ediția 2026';
+
+    if ($mailer->send($recipient, $subject, $message, "Content-Type: text/html\r\n")) {
+        $order->update_meta_data('_cmmc_daruri_confirmation_sent', 'yes');
+        $order->save();
+        $order->add_order_note('E-mailul personalizat de confirmare Daruri Sacre a fost trimis.');
+    }
+}
+add_action('woocommerce_payment_complete', 'cmmc_send_daruri_sacre_confirmation_email');
+
+/**
+ * Treat paid Processing and Completed orders as confirmed orders.
+ */
+function cmmc_maybe_send_daruri_sacre_confirmation_email($order_id, $old_status, $new_status, $order) {
+    unset($old_status);
+
+    if (
+        !in_array($new_status, array('processing', 'completed'), true)
+        || !is_a($order, 'WC_Order')
+        || !$order->get_date_paid()
+    ) {
+        return;
+    }
+
+    cmmc_send_daruri_sacre_confirmation_email($order_id);
+}
+add_action('woocommerce_order_status_changed', 'cmmc_maybe_send_daruri_sacre_confirmation_email', 10, 4);
+
 function cmat_add_body_class($classes) {
     $page_id = cmat_get_workshops_page_id();
     if ($page_id && is_page($page_id)) {
