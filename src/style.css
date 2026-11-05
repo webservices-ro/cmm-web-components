@@ -87,10 +87,10 @@
 .cmat-divider img { display: block; height: auto; opacity: .78; width: 100%; }
 .cmat-pending { color: var(--cmat-green); font-family: var(--cmat-heading); font-size: clamp(1.5rem,2.4vw,2rem); font-weight: 600; margin: 0; padding: clamp(1.5rem,2vw,2rem) 1.5rem 4rem; text-align: center; }
 .cmat-workshops { margin: 0 auto; max-width: 1180px; padding: clamp(3.75rem,6vw,6rem) max(1.5rem,4vw) 7rem; }
-.cmat-grid { display: grid; gap: 1.15rem; grid-template-columns: repeat(3,minmax(0,1fr)); }
+.cmat-grid { display: grid; gap: 1.15rem; grid-template-columns: repeat(3,minmax(0,380px)); justify-content: center; }
 .cmat-card { background: #fff; border: 1px solid var(--cmat-line); display: flex; flex-direction: column; min-width: 0; overflow: hidden; }
 .cmat-card__media { aspect-ratio: 4/3; background: #edf1ed; border-bottom: 1px solid var(--cmat-line); display: block; min-height: 0; overflow: hidden; }
-.cmat-card__media img { height: 100%; object-fit: cover; transition: transform 500ms ease; width: 100%; }
+.cmat-card__media img { height: 100%; object-fit: contain; transition: transform 500ms ease; width: 100%; }
 .cmat-card__media:hover img { transform: scale(1.025); }
 .cmat-card__placeholder { background: linear-gradient(145deg,#e5ebe6,#f7f4ef); display: block; height: 100%; }
 .cmat-card__body { display: flex; flex: 1; flex-direction: column; padding: clamp(1.45rem,2.4vw,2rem); }
@@ -108,7 +108,7 @@
 .cmat-visually-hidden { height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; clip: rect(0,0,0,0); }
 
 @media (max-width: 1024px) {
-  .cmat-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .cmat-grid { grid-template-columns: repeat(2,minmax(0,380px)); }
 }
 @media (max-width: 680px) {
   .cmat-hero { min-height: 280px; padding: 2rem 1.25rem; }
@@ -120,6 +120,7 @@
   .cmat-divider { max-width: none; padding: 0; width: 100%; }
   .cmat-grid { grid-template-columns: 1fr; }
   .cmat-card__media { aspect-ratio: 4/3; }
+  .cmat-card h3 { text-align: center; }
   .cmat-card__actions, .cmat-button { width: 100%; }
 }
 @media (prefers-reduced-motion: reduce) {
