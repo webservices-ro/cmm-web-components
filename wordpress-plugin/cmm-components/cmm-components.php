@@ -295,6 +295,7 @@ function cmmc_render_component_shortcode($attributes = array()) {
         'page' => '',
         'reservation_url' => '',
         'presentation_url' => '',
+        'product_id' => '2047',
     ), $attributes, 'cmm_component');
 
     $page = sanitize_key($attributes['page']);
@@ -315,9 +316,18 @@ function cmmc_render_component_shortcode($attributes = array()) {
         wp_enqueue_style($style_handle);
     }
 
+    $reservation_url = esc_url_raw($attributes['reservation_url']);
+    $product_id = absint($attributes['product_id']);
+    if (!$reservation_url && 'daruri-sacre-2026' === $page && $product_id && function_exists('wc_get_product')) {
+        $product = wc_get_product($product_id);
+        if ($product && $product->is_purchasable() && $product->is_in_stock()) {
+            $reservation_url = $product->add_to_cart_url();
+        }
+    }
+
     $config = array(
         'component' => $page,
-        'reservationUrl' => esc_url_raw($attributes['reservation_url']),
+        'reservationUrl' => esc_url_raw($reservation_url),
         'presentationUrl' => esc_url_raw($attributes['presentation_url']),
     );
 

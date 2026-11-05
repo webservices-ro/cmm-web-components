@@ -30,6 +30,12 @@ Pentru a lega butonul de rezervare la o pagină sau la un produs, folosește atr
 [cmm_component page="daruri-sacre-2026" reservation_url="https://example.com/rezervare/"]
 ```
 
+Implicit, butonul „Rezervă-ți locul” adaugă în coș produsul WooCommerce cu ID-ul `2047`. ID-ul poate fi schimbat direct în shortcode dacă este necesar:
+
+```text
+[cmm_component page="daruri-sacre-2026" product_id="2047"]
+```
+
 Descrierea compactă Daruri Sacre poate fi introdusă în descrierea produsului WooCommerce astfel:
 
 ```text
