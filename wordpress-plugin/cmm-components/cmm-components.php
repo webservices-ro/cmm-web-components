@@ -321,7 +321,7 @@ function cmmc_render_component_shortcode($attributes = array()) {
     if (!$reservation_url && 'daruri-sacre-2026' === $page && $product_id && function_exists('wc_get_product')) {
         $product = wc_get_product($product_id);
         if ($product && $product->is_purchasable() && $product->is_in_stock()) {
-            $reservation_url = $product->add_to_cart_url();
+            $reservation_url = add_query_arg('add-to-cart', $product_id, wc_get_checkout_url());
         }
     }
 
