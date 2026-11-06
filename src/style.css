@@ -102,9 +102,11 @@
 .cmat-card__price del { color: var(--cmat-muted); font-size: .9em; margin-right: .35rem; }
 .cmat-card__reviews { color: var(--cmat-green-soft); font-size: .88rem; text-decoration: underline; text-underline-offset: 3px; }
 .cmat-card__actions { display: flex; flex-wrap: wrap; gap: .65rem; justify-content: center; margin-top: 1.5rem; }
-.cmat-button { border: 1px solid var(--cmat-green); border-radius: 3px; font-size: .72rem; font-weight: 700; letter-spacing: .07em; min-height: 46px; padding: .82rem 1rem; text-align: center; text-decoration: none; text-transform: uppercase; transition: background-color 180ms ease,color 180ms ease; }
+.cmat-button { border: 2px solid var(--cmat-green); border-radius: 14px; box-shadow: 0 3px 0 rgba(21, 82, 56, .28); font-size: .72rem; font-weight: 700; letter-spacing: .07em; min-height: 46px; padding: .82rem 1rem; text-align: center; text-decoration: none; text-transform: uppercase; transition: background-color 180ms ease, box-shadow 180ms ease, color 180ms ease, transform 180ms ease; }
 .cmat-button--primary, .cmat-button--secondary:hover { background: var(--cmat-green); color: #fff; }
 .cmat-button--secondary, .cmat-button--primary:hover { background: transparent; color: var(--cmat-green); }
+.cmat-button:hover { box-shadow: 0 1px 0 rgba(21, 82, 56, .28); transform: translateY(2px); }
+.cmat-button:focus-visible { outline: 2px solid var(--cmat-green); outline-offset: 3px; }
 .cmat-visually-hidden { height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; clip: rect(0,0,0,0); }
 
 @media (max-width: 1024px) {
@@ -123,7 +125,8 @@
   .cmat-card__actions, .cmat-button { width: 100%; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .cmat-card__media img, .cmat-button { transition: none; }
+  .cmat-card__media img, .cmat-button, .daruri-cta, .daruri-product__action a { transition: none; }
+  .cmat-button:hover, .daruri-cta:hover, .daruri-product__action a:hover { transform: none; }
 }
 
 /* Local component router */
@@ -180,8 +183,9 @@ body:has(.component-index) { background: #f4f0e9; margin: 0; }
 .daruri-signature { margin: 1.75rem auto; max-width: 780px; text-align: left; width: 100%; }
 .daruri-signature img { display: inline-block; height: auto; max-width: min(100%, 520px); object-fit: contain; width: auto; }
 .daruri-cta-wrap { display: flex; justify-content: center; margin: 1.75rem auto 1rem; max-width: 780px; }
-.daruri-cta { background: var(--daruri-wine); border: 1px solid var(--daruri-wine); color: #fff; display: inline-flex; font-size: .78rem; font-weight: 700; justify-content: center; letter-spacing: .14em; min-height: 52px; padding: 1rem 1.5rem; text-align: center; text-decoration: none; transition: background-color 180ms ease, color 180ms ease; }
-.daruri-cta:hover, .daruri-cta:focus-visible { background: transparent; color: var(--daruri-wine); }
+.daruri-cta { background: var(--daruri-wine); border: 2px solid var(--daruri-wine); border-radius: 14px; box-shadow: 0 3px 0 rgba(112, 68, 62, .28); color: #fff; display: inline-flex; font-size: .78rem; font-weight: 700; justify-content: center; letter-spacing: .14em; min-height: 52px; padding: 1rem 1.5rem; text-align: center; text-decoration: none; transition: background-color 180ms ease, box-shadow 180ms ease, color 180ms ease, transform 180ms ease; }
+.daruri-cta:hover { background: transparent; box-shadow: 0 1px 0 rgba(112, 68, 62, .28); color: var(--daruri-wine); transform: translateY(2px); }
+.daruri-cta:focus-visible { outline: 2px solid var(--daruri-wine); outline-offset: 3px; }
 .daruri-limited { color: var(--daruri-wine); font-family: var(--cmat-heading); font-size: clamp(1.25rem, 2.2vw, 1.65rem) !important; font-style: italic; font-weight: 600; margin-bottom: clamp(2.5rem, 4vw, 4rem) !important; text-align: center; }
 .daruri-conditions { border-bottom: 1px solid rgba(112, 68, 62, .24); border-top: 1px solid rgba(112, 68, 62, .24); margin: 2.5rem auto 0; max-width: 780px; }
 .daruri-conditions > h2 { color: var(--daruri-wine); font-size: 1rem; font-weight: 700; margin: 0; padding: 1.15rem 0; }
@@ -234,8 +238,9 @@ body:has(.component-index) { background: #f4f0e9; margin: 0; }
 .daruri-product__lead { color: #70443e; font-family: var(--cmat-heading); font-size: clamp(1.2rem, 2.5vw, 1.55rem) !important; font-style: italic; font-weight: 600; line-height: 1.5 !important; }
 .daruri-product__closing { color: #111; font-weight: 700; }
 .daruri-product__action { display: flex; justify-content: center; margin-top: 1.75rem; }
-.daruri-product__action a { background: #70443e; border: 1px solid #70443e; color: #fff; display: inline-flex; font-size: .78rem; font-weight: 700; justify-content: center; letter-spacing: .12em; min-height: 52px; padding: 1rem 1.5rem; text-decoration: none; text-transform: uppercase; transition: background-color 180ms ease, color 180ms ease; }
-.daruri-product__action a:hover, .daruri-product__action a:focus-visible { background: transparent; color: #70443e; }
+.daruri-product__action a { background: #70443e; border: 2px solid #70443e; border-radius: 14px; box-shadow: 0 3px 0 rgba(112, 68, 62, .28); color: #fff; display: inline-flex; font-size: .78rem; font-weight: 700; justify-content: center; letter-spacing: .12em; min-height: 52px; padding: 1rem 1.5rem; text-decoration: none; text-transform: uppercase; transition: background-color 180ms ease, box-shadow 180ms ease, color 180ms ease, transform 180ms ease; }
+.daruri-product__action a:hover { background: transparent; box-shadow: 0 1px 0 rgba(112, 68, 62, .28); color: #70443e; transform: translateY(2px); }
+.daruri-product__action a:focus-visible { outline: 2px solid #70443e; outline-offset: 3px; }
 
 @media (max-width: 680px) {
   .component-index__grid { grid-template-columns: 1fr; }
