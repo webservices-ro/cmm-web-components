@@ -256,5 +256,6 @@ body:has(.component-index) { background: #f4f0e9; margin: 0; }
     object-fit: contain;
   }
   .daruri-title { font-size: clamp(3rem, 15vw, 4.8rem); }
+  .daruri-heading, .daruri-subheading { text-align: center; }
   .daruri-subheading--single-line { white-space: normal; }
 }
