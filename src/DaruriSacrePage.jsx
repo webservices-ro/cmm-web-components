@@ -23,6 +23,9 @@ function DaruriEventMeta() {
 
 export default function DaruriSacrePage({ config = {} }) {
   let imageIndex = 0
+  const whatsappShareUrl = `https://wa.me/?text=${encodeURIComponent(
+    `Vreau să împărtășesc cu tine atelierul Daruri Sacre – Ediția 2026: ${window.location.href}`,
+  )}`
   const conditionsStartIndex = DARURI_BLOCKS.findIndex((block) => block.text === 'Condiții de rezervare și anulare')
   const conditionBlocks = DARURI_BLOCKS.slice(conditionsStartIndex + 1)
   const conditionGroups = conditionBlocks.reduce((groups, condition) => {
@@ -131,6 +134,11 @@ export default function DaruriSacrePage({ config = {} }) {
                   : undefined
         return <p className={className} id={isLimited ? 'rezervare' : undefined} key={index}>{block.text}</p>
       })}
+      <div className="daruri-share">
+        <a href={whatsappShareUrl} target="_blank" rel="noopener noreferrer">
+          Trimite unui prieten pe WhatsApp
+        </a>
+      </div>
     </main>
   )
 }

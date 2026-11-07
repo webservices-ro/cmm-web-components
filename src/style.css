@@ -203,6 +203,10 @@ body:has(.component-index) { background: #f4f0e9; margin: 0; }
 .daruri-conditions__content > .daruri-legal-notice { border-top: 1px solid rgba(112, 68, 62, .16); margin: 0 !important; padding-top: 1.25rem; }
 .daruri-condition-title { color: var(--daruri-wine); font-weight: 700; margin-bottom: .75rem !important; margin-top: 1.75rem !important; }
 .daruri-legal-notice { color: #111; font-weight: 700; margin-bottom: 0 !important; }
+.daruri-share { display: flex; justify-content: center; margin: 2rem auto 1.5rem; max-width: 780px; }
+.daruri-share a { align-items: center; background: #25d366; border: 2px solid #25d366; border-radius: 10px; color: #102f1b; display: inline-flex; font-size: 1rem; font-weight: 700; justify-content: center; min-height: 52px; padding: .9rem 1.5rem; text-align: center; text-decoration: none; transition: background-color 180ms ease, color 180ms ease; }
+.daruri-share a:hover { background: transparent; color: #176b37; }
+.daruri-share a:focus-visible { outline: 2px solid #176b37; outline-offset: 3px; }
 
 /* Compact Daruri Sacre component for WooCommerce product descriptions */
 .daruri-product, .daruri-product * { box-sizing: border-box; }
