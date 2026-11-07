@@ -150,12 +150,13 @@ body:has(.component-index) { background: #f4f0e9; margin: 0; }
 .daruri-page, .daruri-page * { box-sizing: border-box; }
 .single-cmm_atelier .daruri-page { margin-bottom: 0; margin-top: 0; }
 .daruri-page {
+  --cmat-heading: Cambria, Georgia, serif;
   --daruri-cream: #f7f2e9;
   --daruri-gold: #a57d3d;
   --daruri-wine: #70443e;
   background: var(--daruri-cream);
   color: #3d4038;
-  font-family: var(--cmat-body);
+  font-family: Cambria, Georgia, serif;
   margin-inline: calc(50% - 50vw);
   overflow: hidden;
   padding: 0 max(1.25rem, calc((100vw - 920px) / 2)) 1rem;
@@ -207,10 +208,11 @@ body:has(.component-index) { background: #f4f0e9; margin: 0; }
 /* Compact Daruri Sacre component for WooCommerce product descriptions */
 .daruri-product, .daruri-product * { box-sizing: border-box; }
 .daruri-product {
+  --cmat-heading: Cambria, Georgia, serif;
   background: var(--daruri-cream, #f7f2e9);
   border: 1px solid rgba(112, 68, 62, .16);
   color: #3d4038;
-  font-family: var(--cmat-body);
+  font-family: Cambria, Georgia, serif;
   margin: 1.5rem auto;
   max-width: 780px;
   padding: clamp(1.5rem, 4vw, 3rem);
