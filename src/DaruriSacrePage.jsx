@@ -8,6 +8,18 @@ const imageModules = import.meta.glob('./assets/daruri-sacre-2026/*', {
 const images = Object.fromEntries(Object.entries(imageModules).map(([path, url]) => [path.split('/').pop(), url]))
 const imageAlt = (index) => `Atmosferă din cadrul atelierului Daruri Sacre ${index + 1}`
 const LEGAL_NOTICE = 'Prezentele condiții se aplică fără a aduce atingere drepturilor legale ale consumatorului.'
+const EVENT_META = [
+  '12 decembrie 2026 · București · 5 ore',
+  'Interval orar 10:00- 15:00',
+]
+
+function DaruriEventMeta() {
+  return (
+    <section className="daruri-event-meta" aria-label="Detaliile evenimentului">
+      {EVENT_META.map((line) => <p key={line}>{line}</p>)}
+    </section>
+  )
+}
 
 export default function DaruriSacrePage({ config = {} }) {
   let imageIndex = 0
@@ -26,6 +38,9 @@ export default function DaruriSacrePage({ config = {} }) {
     <main className="daruri-page">
       {DARURI_BLOCKS.map((block, index) => {
         if (conditionsStartIndex !== -1 && index > conditionsStartIndex) return null
+
+        if (block.text === EVENT_META[0]) return <DaruriEventMeta key="event-meta" />
+        if (block.text === EVENT_META[1]) return null
 
         if (index === conditionsStartIndex) {
           return (
@@ -105,7 +120,6 @@ export default function DaruriSacrePage({ config = {} }) {
         const isLimited = block.text === 'Locurile sunt limitate'
         const isConditionTitle = /^\d+\.\s/.test(block.text)
         const isLegalNotice = block.text === LEGAL_NOTICE
-        const isEventMeta = block.text === '12 decembrie 2026 · București · 5 ore' || block.text === 'Interval orar 10:00- 15:00'
         const className = isEyebrow
           ? 'daruri-eyebrow'
           : isLimited
@@ -114,9 +128,7 @@ export default function DaruriSacrePage({ config = {} }) {
                 ? 'daruri-condition-title'
                 : isLegalNotice
                   ? 'daruri-legal-notice'
-                  : isEventMeta
-                    ? 'daruri-event-meta'
-                : undefined
+                  : undefined
         return <p className={className} id={isLimited ? 'rezervare' : undefined} key={index}>{block.text}</p>
       })}
     </main>

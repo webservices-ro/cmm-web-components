@@ -158,15 +158,17 @@ body:has(.component-index) { background: #f4f0e9; margin: 0; }
   font-family: var(--cmat-body);
   margin-inline: calc(50% - 50vw);
   overflow: hidden;
-  padding: clamp(2.5rem, 4vw, 4rem) max(1.25rem, calc((100vw - 920px) / 2)) 1rem;
+  padding: 0 max(1.25rem, calc((100vw - 920px) / 2)) 1rem;
   width: 100vw;
 }
-.daruri-page > p, .daruri-heading, .daruri-subheading, .daruri-title { margin-left: auto; margin-right: auto; max-width: 780px; }
-.daruri-title { color: var(--daruri-wine); font-family: var(--cmat-heading); font-size: clamp(3.1rem, 8vw, 7.4rem); font-weight: 400; letter-spacing: -.025em; line-height: .87; margin-bottom: 1.25rem; text-align: center; text-wrap: balance; }
+.daruri-page > p, .daruri-heading, .daruri-subheading, .daruri-title, .daruri-event-meta { margin-left: auto; margin-right: auto; max-width: 780px; }
+.daruri-title { color: var(--daruri-wine); font-family: var(--cmat-heading); font-size: clamp(3.1rem, 8vw, 7.4rem); font-weight: 400; letter-spacing: -.025em; line-height: .87; margin-bottom: 1.25rem; margin-top: 0; text-align: center; text-wrap: balance; }
 .daruri-eyebrow { color: var(--daruri-gold); font-family: var(--cmat-heading); font-size: clamp(1.35rem, 3vw, 2rem) !important; font-style: italic; margin-bottom: 2.25rem !important; text-align: center; }
-.daruri-page > p { font-size: clamp(1rem, 1.4vw, 1.1rem); line-height: 1.8; margin-bottom: 1.25rem; margin-top: 0; white-space: pre-line; }
+.daruri-page > p { font-size: clamp(1rem, 1.4vw, 1.1rem); line-height: 1.8; margin-bottom: 1.25rem; margin-top: 0; text-align: justify; white-space: pre-line; }
 .daruri-page > p:nth-of-type(2), .daruri-page > p:nth-of-type(3) { color: var(--daruri-wine); font-size: .82rem; font-weight: 700; letter-spacing: .08em; margin-bottom: .3rem; text-align: center; text-transform: uppercase; }
-.daruri-page > .daruri-event-meta { background: rgba(165, 125, 61, .12); color: var(--daruri-wine); font-family: var(--cmat-heading); font-size: clamp(1.2rem, 2.3vw, 1.55rem); font-weight: 700; letter-spacing: .03em; margin-bottom: .35rem; padding: .65rem 1rem; text-align: center; text-transform: none; }
+.daruri-event-meta { background: rgba(165, 125, 61, .12); color: var(--daruri-wine); font-family: var(--cmat-heading); font-size: clamp(1.68rem, 3.22vw, 2.17rem); font-weight: 700; letter-spacing: .03em; margin-bottom: 1.25rem; padding: .65rem 1rem; text-align: center; }
+.daruri-event-meta > p { margin: 0; }
+.daruri-event-meta > p + p { border-top: 5px solid var(--daruri-cream); margin-top: .35rem; padding-top: .35rem; }
 .daruri-heading { color: var(--daruri-wine); font-family: var(--cmat-heading); font-size: clamp(2.5rem, 5.2vw, 4.5rem); font-weight: 500; line-height: 1; margin-bottom: 1.4rem; margin-top: clamp(2.75rem, 5vw, 4.5rem); text-align: center; text-wrap: balance; }
 .daruri-subheading { color: var(--daruri-wine); font-family: var(--cmat-heading); font-size: clamp(1.75rem, 3.4vw, 2.65rem); font-weight: 500; line-height: 1.08; margin-bottom: 1rem; margin-top: 2.25rem; text-wrap: balance; }
 .daruri-subheading--single-line { font-size: clamp(1.65rem, 2.8vw, 2.25rem); white-space: nowrap; }
@@ -197,7 +199,7 @@ body:has(.component-index) { background: #f4f0e9; margin: 0; }
 .daruri-conditions__content { padding: 0 0 1.25rem; }
 .daruri-condition { border-top: 1px solid rgba(112, 68, 62, .16); }
 .daruri-condition__content { padding: 0 1rem .25rem; }
-.daruri-condition__content > p, .daruri-conditions__content > p { font-size: clamp(1rem, 1.4vw, 1.1rem); line-height: 1.8; margin-bottom: 1.25rem; margin-top: 0; white-space: pre-line; }
+.daruri-condition__content > p, .daruri-conditions__content > p { font-size: clamp(1rem, 1.4vw, 1.1rem); line-height: 1.8; margin-bottom: 1.25rem; margin-top: 0; text-align: justify; white-space: pre-line; }
 .daruri-conditions__content > .daruri-legal-notice { border-top: 1px solid rgba(112, 68, 62, .16); margin: 0 !important; padding-top: 1.25rem; }
 .daruri-condition-title { color: var(--daruri-wine); font-weight: 700; margin-bottom: .75rem !important; margin-top: 1.75rem !important; }
 .daruri-legal-notice { color: #111; font-weight: 700; margin-bottom: 0 !important; }
@@ -223,7 +225,7 @@ body:has(.component-index) { background: #f4f0e9; margin: 0; }
   text-align: center;
   text-wrap: balance;
 }
-.daruri-product p { font-size: 1rem; line-height: 1.75; margin: 0 0 1.15rem; }
+.daruri-product p { font-size: 1rem; line-height: 1.75; margin: 0 0 1.15rem; text-align: justify; }
 .daruri-product .daruri-product__meta {
   background: rgba(165, 125, 61, .12);
   color: #70443e;
