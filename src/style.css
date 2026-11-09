@@ -166,7 +166,7 @@ body:has(.component-index) { background: #f4f0e9; margin: 0; }
 .daruri-title { color: var(--daruri-wine); font-family: var(--cmat-heading); font-size: clamp(3.1rem, 8vw, 7.4rem); font-weight: 400; letter-spacing: -.025em; line-height: .87; margin-bottom: 1.25rem; margin-top: 0; text-align: center; text-wrap: balance; }
 .daruri-eyebrow { color: var(--daruri-gold); font-family: var(--cmat-heading); font-size: clamp(1.35rem, 3vw, 2rem) !important; font-style: italic; margin-bottom: 2.25rem !important; text-align: center; }
 .daruri-page > p { font-size: clamp(1rem, 1.4vw, 1.1rem); line-height: 1.8; margin-bottom: 1.25rem; margin-top: 0; text-align: justify; white-space: pre-line; }
-.daruri-page > p:nth-of-type(2), .daruri-page > p:nth-of-type(3) { color: var(--daruri-wine); font-size: .82rem; font-weight: 700; letter-spacing: .08em; margin-bottom: .3rem; text-align: center; text-transform: uppercase; }
+.daruri-page > p:nth-of-type(2), .daruri-page > p:nth-of-type(3) { color: var(--daruri-wine); font-size: 1.066rem; font-weight: 700; letter-spacing: .08em; margin-bottom: .3rem; text-align: center; text-transform: uppercase; }
 .daruri-event-meta { background: rgba(165, 125, 61, .12); color: var(--daruri-wine); font-family: var(--cmat-heading); font-size: clamp(1.68rem, 3.22vw, 2.17rem); font-weight: 700; letter-spacing: .03em; margin-bottom: 1.25rem; padding: .65rem 1rem; text-align: center; }
 .daruri-event-meta > p { margin: 0; }
 .daruri-event-meta > p + p { border-top: 5px solid var(--daruri-cream); margin-top: .35rem; padding-top: .35rem; }
