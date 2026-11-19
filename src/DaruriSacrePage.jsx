@@ -108,11 +108,11 @@ export default function DaruriSacrePage({ config = {} }) {
 
         if (block.text === '.') return null
         const isEyebrow = index === 1
-        const isCallToAction = block.text === 'REZERVĂ-ȚI LOCUL'
+        const isCallToAction = block.text === 'SOLD OUT!'
         if (isCallToAction) {
           return (
             <div className="daruri-cta-wrap" key={index}>
-              <a className="daruri-cta" href={config.reservationUrl || '#rezervare'}>{block.text}</a>
+              <span className="daruri-cta daruri-cta--sold-out">{block.text}</span>
             </div>
           )
         }

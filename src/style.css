@@ -188,6 +188,7 @@ body:has(.component-index) { background: #f4f0e9; margin: 0; }
 .daruri-cta { background: var(--daruri-cream); border: 2px solid var(--daruri-wine); border-radius: 10px; color: var(--daruri-wine); display: inline-flex; font-size: 1rem; font-weight: 700; justify-content: center; letter-spacing: .04em; min-height: 52px; padding: 1rem 1.5rem; text-align: center; text-decoration: none; transition: background-color 180ms ease, color 180ms ease; }
 .daruri-cta:hover { background: var(--daruri-wine); color: #fff; }
 .daruri-cta:focus-visible { outline: 2px solid var(--daruri-wine); outline-offset: 3px; }
+.daruri-cta--sold-out:hover { background: var(--daruri-cream); color: var(--daruri-wine); }
 .daruri-limited { color: var(--daruri-wine); font-family: var(--cmat-heading); font-size: clamp(1.25rem, 2.2vw, 1.65rem) !important; font-style: italic; font-weight: 600; margin-bottom: clamp(2.5rem, 4vw, 4rem) !important; text-align: center; }
 .daruri-conditions { border-bottom: 1px solid rgba(80, 77, 62, .24); border-top: 1px solid rgba(80, 77, 62, .24); margin: 2.5rem auto 0; max-width: 780px; }
 .daruri-conditions > h2 { color: var(--daruri-wine); font-size: 1rem; font-weight: 700; margin: 0; padding: 1.15rem 0; }

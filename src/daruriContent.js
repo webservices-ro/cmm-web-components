@@ -58,7 +58,7 @@ export const DARURI_BLOCKS = [
   },
   {
     "type": "paragraph",
-    "text": "REZERVĂ-ȚI LOCUL"
+    "text": "SOLD OUT!"
   },
   {
     "type": "heading",
@@ -296,7 +296,7 @@ export const DARURI_BLOCKS = [
   },
   {
     "type": "paragraph",
-    "text": "REZERVĂ-ȚI LOCUL"
+    "text": "SOLD OUT!"
   },
   {
     "type": "paragraph",
@@ -386,7 +386,7 @@ export const DARURI_BLOCKS = [
   },
   {
     "type": "paragraph",
-    "text": "REZERVĂ-ȚI LOCUL"
+    "text": "SOLD OUT!"
   },
   {
     "type": "heading",
@@ -430,7 +430,7 @@ export const DARURI_BLOCKS = [
   },
   {
     "type": "paragraph",
-    "text": "REZERVĂ-ȚI LOCUL"
+    "text": "SOLD OUT!"
   },
   {
     "type": "paragraph",
